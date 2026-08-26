@@ -178,9 +178,118 @@ def build_math():
     print(f"math: {len(items)} rows -> {dst}")
 
 
+def build_vi():
+    """Generate ~250 Vietnamese QA (math + knowledge), no eval leak."""
+    rng = random.Random(20260829)  # distinct seed
+    items, seen = [], set()
+
+    def add(q, a):
+        key = " ".join(q.lower().split())
+        if key in seen:
+            return
+        seen.add(key)
+        items.append({"messages": [
+            {"role": "user", "content": q},
+            {"role": "assistant", "content": a},
+        ]})
+
+    for _ in range(60):
+        a, b, c = rng.randint(5, 25), rng.randint(2, 12), rng.randint(2, 9)
+        op1, op2 = rng.choice(["+", "-"]), rng.choice(["+", "*"])
+        expr = f"{a} {op1} {b} {op2} {c}"
+        add(f"Thực hiện phép tính: {expr}. Kết quả là bao nhiêu? Trả lời bằng một số.",
+            f"Kết quả là {eval(expr)}.")
+    for _ in range(40):
+        p, n = rng.choice([5000, 8000, 12000, 15000]), rng.randint(2, 6)
+        add(f"Một cuốn sách giá {p} đồng. Nếu mua {n} cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số.",
+            f"Tổng tiền là {p * n} đồng.")
+    for _ in range(30):
+        b, q = rng.randint(2, 12), rng.randint(3, 9)
+        add(f"Chia {b * q} thành {b} phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số.",
+            f"Mỗi phần là {q}.")
+    for _ in range(30):
+        a, b = rng.randint(2, 19), rng.randint(2, 19)
+        op = rng.choice(["+", "-", "*"])
+        if op == "-" and a < b:
+            a, b = b, a
+        ans = {"+": a + b, "-": a - b, "*": a * b}[op]
+        add(f"Tính kết quả của phép tính: {a} {op} {b}. Trả lời bằng một số.", f"Kết quả là {ans}.")
+    for _ in range(25):
+        start, step = rng.randint(1, 9), rng.randint(2, 6)
+        terms = [start + i * step for i in range(4)]
+        add(f"Cho dãy số: {', '.join(map(str, terms))}, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số.",
+            f"Số hạng tiếp theo là {terms[-1] + step}.")
+    for _ in range(20):
+        p, d = rng.choice([120, 200, 300, 400, 500]), rng.choice([10, 20, 25, 50])
+        add(f"Một chiếc áo giá {p} đồng được giảm giá {d}%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số.",
+            f"Giá bán sau khi giảm là {p - p * d // 100} đồng.")
+    for _ in range(30):
+        a, b = rng.randint(3, 12), rng.randint(3, 12)
+        if rng.random() < 0.5:
+            add(f"Một hình chữ nhật có chiều dài {a} cm và chiều rộng {b} cm. Chu vi là bao nhiêu? Trả lời bằng một số.",
+                f"Kết quả là {2 * (a + b)}.")
+        else:
+            add(f"Một hình chữ nhật có chiều dài {a} cm và chiều rộng {b} cm. Diện tích là bao nhiêu? Trả lời bằng một số.",
+                f"Kết quả là {a * b}.")
+    for _ in range(15):
+        now, add_year = rng.randint(5, 12), rng.randint(1, 5)
+        add(f"Bé hiện nay {now} tuổi. Hỏi sau {add_year} năm nữa bé bao nhiêu tuổi? Trả lời bằng một số.",
+            f"Sau {add_year} năm nữa bé {now + add_year} tuổi.")
+
+    know = [
+        ("Đồng bằng sông Cửu Long còn gọi là gì?", "Đồng bằng Nam Bộ / miền Tây"),
+        ("Thành phố nào được gọi là 'thành phố ngàn hoa'?", "Đà Lạt"),
+        ("Nước ta giáp với những nước nào trên đất liền?", "Lào, Campuchia, Trung Quốc"),
+        ("Tết Nguyên Đán là ngày lễ lớn nhất ở đâu?", "Việt Nam"),
+        ("Phở nổi tiếng của miền nào?", "miền Bắc"),
+        ("Sài Gòn tên chính thức hiện nay là gì?", "Thành phố Hồ Chí Minh"),
+        ("Bác Hồ sinh năm nào?", "1890"),
+        ("Núi cao nhất Việt Nam?", "Fansipan"),
+        ("Vịnh Hạ Long thuộc tỉnh nào?", "tỉnh Quảng Ninh"),
+        ("Chùa Một Cột ở thành phố nào?", "Hà Nội"),
+        ("Một tuần có mấy ngày?", "7 ngày"),
+        ("Một năm có mấy tháng?", "12 tháng"),
+        ("Thủ đô của nước Nhật?", "Tokyo"),
+        ("Động vật lớn nhất trên cạn?", "voi"),
+        ("Đại dương lớn nhất thế giới?", "Thái Bình Dương"),
+        ("Nước nào có diện tích lớn nhất thế giới?", "Nga"),
+        ("H₂O là công thức hóa học của nước. Đúng hay sai?", "đúng"),
+        ("Ánh sáng truyền nhanh hơn âm thanh. Đúng hay sai?", "đúng"),
+        ("Mặt Trời mọc ở phía Tây. Đúng hay sai?", "sai, mặt trời mọc ở phía Đông"),
+        ("Quốc kỳ Việt Nam có màu gì?", "màu đỏ với ngôi sao vàng"),
+        ("Đơn vị tiền tệ của Việt Nam?", "đồng Việt Nam"),
+        ("Việt Nam có bao nhiêu dân tộc anh em (chính thức)?", "54 dân tộc"),
+    ]
+    rng.shuffle(know)
+    for q, a in know:
+        add(q, a)
+
+    dst = os.path.join(TRAIN_DIR, "vi_250.jsonl")
+    with open(dst, "w", encoding="utf-8", newline="\n") as f:
+        for r in items:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    print(f"vi: {len(items)} rows -> {dst}")
+
+
+def build_merged():
+    """Merge coding(short) + math + vi into the single train file."""
+    main = [json.loads(l) for l in open(os.path.join(TRAIN_DIR, "claude_opus_math_1143.jsonl"), encoding="utf-8")]
+    vi = [json.loads(l) for l in open(os.path.join(TRAIN_DIR, "vi_250.jsonl"), encoding="utf-8")]
+    m_q = set(" ".join(r["messages"][0]["content"].lower().split()) for r in main)
+    vi_new = [r for r in vi if " ".join(r["messages"][0]["content"].lower().split()) not in m_q]
+    combined = main + vi_new
+    dst = os.path.join(TRAIN_DIR, "claude_opus_train_all.jsonl")
+    with open(dst, "w", encoding="utf-8", newline="\n") as f:
+        for r in combined:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    print(f"merged: {len(combined)} rows -> {dst}")
+
+
 def main():
     shorten_dataset()
     build_math()
+    build_vi()
+    build_merged()
 
 
 if __name__ == "__main__":

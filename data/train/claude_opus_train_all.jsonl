@@ -1267,3 +1267,235 @@
 {"messages": [{"role": "user", "content": "7 hours and 41 minutes is how many minutes in total? Answer with a single number."}, {"role": "assistant", "content": "The answer is 461."}]}
 {"messages": [{"role": "user", "content": "Compute the square of 6 and then subtract 4. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 33."}]}
 {"messages": [{"role": "user", "content": "4 hours and 13 minutes is how many minutes in total? Answer with a single number."}, {"role": "assistant", "content": "The answer is 253."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 24 + 8 + 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 39."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 6 + 4 + 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 12."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 24 + 4 * 9. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 60."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 21 + 4 + 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 27."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 7 - 2 * 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -7."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 15 + 5 * 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 55."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 16 - 11 * 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -61."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 25 + 5 * 5. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 50."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 7 + 9 * 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 61."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 7 + 2 + 9. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 18."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 8 - 10 + 9. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 7."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 5 - 11 + 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -4."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 10 - 10 + 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 7."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 19 - 9 + 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 16."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 19 + 8 + 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 33."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 12 - 10 + 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 8."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 12 + 11 * 5. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 67."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 21 - 6 * 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 9."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 5 - 6 + 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 6."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 11 + 3 * 4. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 23."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 18 - 7 * 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -31."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 9 + 2 * 4. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 17."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 23 - 7 + 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 22."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 21 + 12 * 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 105."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 12 + 9 + 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 29."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 13 + 2 * 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 17."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 6 - 11 + 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 2."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 16 - 2 + 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 21."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 16 + 4 + 4. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 24."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 15 - 7 + 9. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 17."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 22 - 9 + 9. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 22."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 16 + 2 + 5. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 23."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 19 - 4 * 9. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -17."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 24 + 9 + 3. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 36."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 16 + 12 * 3. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 52."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 10 - 2 + 5. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 13."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 8 - 8 * 5. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -32."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 8 - 7 + 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 9."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 5 - 5 * 4. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -15."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 17 + 2 + 4. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 23."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 7 + 7 + 5. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 19."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 13 - 4 + 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 17."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 21 - 6 + 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 17."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 14 - 3 * 9. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -13."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 6 + 5 * 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 41."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 11 - 9 * 7. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -52."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 11 + 7 + 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 24."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 5 - 9 + 3. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -1."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 12 - 7 + 3. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 8."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 19 - 9 + 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 18."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 22 - 2 + 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 26."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 12 + 12 + 3. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 27."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 20 + 7 + 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 29."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 22 + 8 + 3. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 33."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 20 - 5 + 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 23."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 8 - 8 * 6. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -40."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 23 - 10 * 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -57."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 24 - 11 * 8. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là -64."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 12 + 10 + 2. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 24."}]}
+{"messages": [{"role": "user", "content": "Thực hiện phép tính: 12 + 5 + 5. Kết quả là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 22."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 12000 đồng. Nếu mua 5 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 60000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 8000 đồng. Nếu mua 4 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 32000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 12000 đồng. Nếu mua 4 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 48000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 5000 đồng. Nếu mua 2 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 10000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 12000 đồng. Nếu mua 3 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 36000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 8000 đồng. Nếu mua 5 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 40000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 12000 đồng. Nếu mua 6 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 72000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 15000 đồng. Nếu mua 4 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 60000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 15000 đồng. Nếu mua 5 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 75000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 12000 đồng. Nếu mua 2 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 24000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 15000 đồng. Nếu mua 6 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 90000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 5000 đồng. Nếu mua 5 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 25000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 8000 đồng. Nếu mua 2 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 16000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 5000 đồng. Nếu mua 4 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 20000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 8000 đồng. Nếu mua 3 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 24000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 5000 đồng. Nếu mua 6 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 30000 đồng."}]}
+{"messages": [{"role": "user", "content": "Một cuốn sách giá 15000 đồng. Nếu mua 3 cuốn cùng loại thì tổng tiền là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Tổng tiền là 45000 đồng."}]}
+{"messages": [{"role": "user", "content": "Chia 55 thành 11 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 5."}]}
+{"messages": [{"role": "user", "content": "Chia 18 thành 3 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 6."}]}
+{"messages": [{"role": "user", "content": "Chia 10 thành 2 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 5."}]}
+{"messages": [{"role": "user", "content": "Chia 108 thành 12 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 9."}]}
+{"messages": [{"role": "user", "content": "Chia 84 thành 12 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 7."}]}
+{"messages": [{"role": "user", "content": "Chia 48 thành 12 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 4."}]}
+{"messages": [{"role": "user", "content": "Chia 28 thành 7 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 4."}]}
+{"messages": [{"role": "user", "content": "Chia 6 thành 2 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 3."}]}
+{"messages": [{"role": "user", "content": "Chia 48 thành 6 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 8."}]}
+{"messages": [{"role": "user", "content": "Chia 36 thành 9 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 4."}]}
+{"messages": [{"role": "user", "content": "Chia 32 thành 4 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 8."}]}
+{"messages": [{"role": "user", "content": "Chia 42 thành 7 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 6."}]}
+{"messages": [{"role": "user", "content": "Chia 20 thành 5 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 4."}]}
+{"messages": [{"role": "user", "content": "Chia 25 thành 5 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 5."}]}
+{"messages": [{"role": "user", "content": "Chia 49 thành 7 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 7."}]}
+{"messages": [{"role": "user", "content": "Chia 45 thành 9 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 5."}]}
+{"messages": [{"role": "user", "content": "Chia 27 thành 9 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 3."}]}
+{"messages": [{"role": "user", "content": "Chia 16 thành 2 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 8."}]}
+{"messages": [{"role": "user", "content": "Chia 24 thành 6 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 4."}]}
+{"messages": [{"role": "user", "content": "Chia 42 thành 6 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 7."}]}
+{"messages": [{"role": "user", "content": "Chia 44 thành 11 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 4."}]}
+{"messages": [{"role": "user", "content": "Chia 24 thành 3 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 8."}]}
+{"messages": [{"role": "user", "content": "Chia 36 thành 12 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 3."}]}
+{"messages": [{"role": "user", "content": "Chia 27 thành 3 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 9."}]}
+{"messages": [{"role": "user", "content": "Chia 18 thành 2 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 9."}]}
+{"messages": [{"role": "user", "content": "Chia 66 thành 11 phần bằng nhau. Mỗi phần là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Mỗi phần là 6."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 18 * 12. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 216."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 19 - 3. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 16."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 7 + 7. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 14."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 15 - 10. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 5."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 15 + 5. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 20."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 7 * 15. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 105."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 10 - 8. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 2."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 15 - 11. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 4."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 15 + 9. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 24."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 9 * 16. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 144."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 18 - 8. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 10."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 5 + 15. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 20."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 3 + 8. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 11."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 12 + 10. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 22."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 12 - 2. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 10."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 6 * 7. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 42."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 10 * 13. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 130."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 11 + 16. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 27."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 18 + 5. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 23."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 8 + 12. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 20."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 11 + 11. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 22."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 3 + 14. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 17."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 17 - 9. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 8."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 11 + 2. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 13."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 19 + 14. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 33."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 16 + 19. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 35."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 6 * 4. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 24."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 4 + 14. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 18."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 8 * 8. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 64."}]}
+{"messages": [{"role": "user", "content": "Tính kết quả của phép tính: 5 + 9. Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 14."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 6, 9, 12, 15, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 18."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 3, 5, 7, 9, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 11."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 5, 7, 9, 11, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 13."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 1, 7, 13, 19, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 25."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 2, 6, 10, 14, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 18."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 6, 12, 18, 24, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 30."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 8, 12, 16, 20, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 24."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 2, 7, 12, 17, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 22."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 8, 10, 12, 14, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 16."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 5, 8, 11, 14, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 17."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 3, 8, 13, 18, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 23."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 5, 11, 17, 23, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 29."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 5, 9, 13, 17, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 21."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 9, 15, 21, 27, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 33."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 2, 8, 14, 20, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 26."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 8, 14, 20, 26, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 32."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 7, 9, 11, 13, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 15."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 4, 7, 10, 13, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 16."}]}
+{"messages": [{"role": "user", "content": "Cho dãy số: 9, 13, 17, 21, ... Số hạng tiếp theo là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Số hạng tiếp theo là 25."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 120 đồng được giảm giá 25%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 90 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 300 đồng được giảm giá 25%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 225 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 400 đồng được giảm giá 50%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 200 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 500 đồng được giảm giá 20%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 400 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 300 đồng được giảm giá 10%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 270 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 300 đồng được giảm giá 20%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 240 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 120 đồng được giảm giá 50%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 60 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 200 đồng được giảm giá 10%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 180 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 400 đồng được giảm giá 25%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 300 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 500 đồng được giảm giá 10%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 450 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 200 đồng được giảm giá 20%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 160 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 120 đồng được giảm giá 20%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 96 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 120 đồng được giảm giá 10%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 108 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 300 đồng được giảm giá 50%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 150 đồng."}]}
+{"messages": [{"role": "user", "content": "Một chiếc áo giá 200 đồng được giảm giá 25%. Hỏi giá bán sau khi giảm là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Giá bán sau khi giảm là 150 đồng."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 9 cm và chiều rộng 12 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 42."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 11 cm và chiều rộng 12 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 46."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 9 cm và chiều rộng 6 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 54."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 8 cm và chiều rộng 9 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 72."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 5 cm và chiều rộng 10 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 50."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 6 cm và chiều rộng 4 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 20."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 8 cm và chiều rộng 12 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 96."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 4 cm và chiều rộng 8 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 32."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 4 cm và chiều rộng 5 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 20."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 9 cm và chiều rộng 11 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 40."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 7 cm và chiều rộng 9 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 32."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 10 cm và chiều rộng 5 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 30."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 7 cm và chiều rộng 5 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 35."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 11 cm và chiều rộng 7 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 77."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 11 cm và chiều rộng 3 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 33."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 6 cm và chiều rộng 6 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 36."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 9 cm và chiều rộng 4 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 36."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 5 cm và chiều rộng 12 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 60."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 6 cm và chiều rộng 8 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 48."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 5 cm và chiều rộng 4 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 18."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 7 cm và chiều rộng 8 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 56."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 3 cm và chiều rộng 11 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 28."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 7 cm và chiều rộng 4 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 22."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 5 cm và chiều rộng 11 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 55."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 10 cm và chiều rộng 5 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 50."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 8 cm và chiều rộng 3 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 24."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 10 cm và chiều rộng 7 cm. Chu vi là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 34."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 10 cm và chiều rộng 11 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 110."}]}
+{"messages": [{"role": "user", "content": "Một hình chữ nhật có chiều dài 10 cm và chiều rộng 6 cm. Diện tích là bao nhiêu? Trả lời bằng một số."}, {"role": "assistant", "content": "Kết quả là 60."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 8 tuổi. Hỏi sau 5 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 5 năm nữa bé 13 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 6 tuổi. Hỏi sau 1 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 1 năm nữa bé 7 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 12 tuổi. Hỏi sau 5 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 5 năm nữa bé 17 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 6 tuổi. Hỏi sau 4 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 4 năm nữa bé 10 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 7 tuổi. Hỏi sau 1 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 1 năm nữa bé 8 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 9 tuổi. Hỏi sau 4 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 4 năm nữa bé 13 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 5 tuổi. Hỏi sau 3 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 3 năm nữa bé 8 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 8 tuổi. Hỏi sau 2 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 2 năm nữa bé 10 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 8 tuổi. Hỏi sau 4 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 4 năm nữa bé 12 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 7 tuổi. Hỏi sau 5 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 5 năm nữa bé 12 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 12 tuổi. Hỏi sau 4 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 4 năm nữa bé 16 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 9 tuổi. Hỏi sau 1 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 1 năm nữa bé 10 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 6 tuổi. Hỏi sau 5 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 5 năm nữa bé 11 tuổi."}]}
+{"messages": [{"role": "user", "content": "Bé hiện nay 10 tuổi. Hỏi sau 5 năm nữa bé bao nhiêu tuổi? Trả lời bằng một số."}, {"role": "assistant", "content": "Sau 5 năm nữa bé 15 tuổi."}]}
+{"messages": [{"role": "user", "content": "Động vật lớn nhất trên cạn?"}, {"role": "assistant", "content": "voi"}]}
+{"messages": [{"role": "user", "content": "Thủ đô của nước Nhật?"}, {"role": "assistant", "content": "Tokyo"}]}
+{"messages": [{"role": "user", "content": "Nước ta giáp với những nước nào trên đất liền?"}, {"role": "assistant", "content": "Lào, Campuchia, Trung Quốc"}]}
+{"messages": [{"role": "user", "content": "Nước nào có diện tích lớn nhất thế giới?"}, {"role": "assistant", "content": "Nga"}]}
+{"messages": [{"role": "user", "content": "Việt Nam có bao nhiêu dân tộc anh em (chính thức)?"}, {"role": "assistant", "content": "54 dân tộc"}]}
+{"messages": [{"role": "user", "content": "Tết Nguyên Đán là ngày lễ lớn nhất ở đâu?"}, {"role": "assistant", "content": "Việt Nam"}]}
+{"messages": [{"role": "user", "content": "Chùa Một Cột ở thành phố nào?"}, {"role": "assistant", "content": "Hà Nội"}]}
+{"messages": [{"role": "user", "content": "Phở nổi tiếng của miền nào?"}, {"role": "assistant", "content": "miền Bắc"}]}
+{"messages": [{"role": "user", "content": "Mặt Trời mọc ở phía Tây. Đúng hay sai?"}, {"role": "assistant", "content": "sai, mặt trời mọc ở phía Đông"}]}
+{"messages": [{"role": "user", "content": "Ánh sáng truyền nhanh hơn âm thanh. Đúng hay sai?"}, {"role": "assistant", "content": "đúng"}]}
+{"messages": [{"role": "user", "content": "Một tuần có mấy ngày?"}, {"role": "assistant", "content": "7 ngày"}]}
+{"messages": [{"role": "user", "content": "Vịnh Hạ Long thuộc tỉnh nào?"}, {"role": "assistant", "content": "tỉnh Quảng Ninh"}]}
+{"messages": [{"role": "user", "content": "Thành phố nào được gọi là 'thành phố ngàn hoa'?"}, {"role": "assistant", "content": "Đà Lạt"}]}
+{"messages": [{"role": "user", "content": "Đồng bằng sông Cửu Long còn gọi là gì?"}, {"role": "assistant", "content": "Đồng bằng Nam Bộ / miền Tây"}]}
+{"messages": [{"role": "user", "content": "Đại dương lớn nhất thế giới?"}, {"role": "assistant", "content": "Thái Bình Dương"}]}
+{"messages": [{"role": "user", "content": "Sài Gòn tên chính thức hiện nay là gì?"}, {"role": "assistant", "content": "Thành phố Hồ Chí Minh"}]}
+{"messages": [{"role": "user", "content": "H₂O là công thức hóa học của nước. Đúng hay sai?"}, {"role": "assistant", "content": "đúng"}]}
+{"messages": [{"role": "user", "content": "Núi cao nhất Việt Nam?"}, {"role": "assistant", "content": "Fansipan"}]}
+{"messages": [{"role": "user", "content": "Đơn vị tiền tệ của Việt Nam?"}, {"role": "assistant", "content": "đồng Việt Nam"}]}
+{"messages": [{"role": "user", "content": "Một năm có mấy tháng?"}, {"role": "assistant", "content": "12 tháng"}]}
+{"messages": [{"role": "user", "content": "Bác Hồ sinh năm nào?"}, {"role": "assistant", "content": "1890"}]}
+{"messages": [{"role": "user", "content": "Quốc kỳ Việt Nam có màu gì?"}, {"role": "assistant", "content": "màu đỏ với ngôi sao vàng"}]}
