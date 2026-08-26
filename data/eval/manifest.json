@@ -4,10 +4,10 @@
   "note": "Frozen code-only benchmark. Used suites: coding only. Other suites (math/reasoning/general/qualitative) removed for this lab.",
   "files": {
     "coding.jsonl": {
-      "count": 24,
-      "sha256": "e535e361deea1944a117b580a7ee4b417584236e84951ecc0891736e4205d853"
+      "count": 84,
+      "sha256": "7bc53b319676b19736b6c654f81a36386121f33e847fcbb7fe507cc917af5b26"
     }
   },
-  "total_auto": 24,
+  "total_auto": 84,
   "total_qualitative": 0
 }
