@@ -27,7 +27,7 @@ from transformers import (
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
 ROOT = Path(__file__).resolve().parent
-DATA = ROOT / "data" / "train" / "coder_train_code_743.jsonl"
+DATA = ROOT / "data" / "train" / "coder_train_all_chunked.jsonl"
 MODEL_ID = "Qwen/Qwen2.5-Coder-0.5B-Instruct"
 RESPONSE_TEMPLATE = "\nassistant"  # Qwen chat marker before the assistant answer
 

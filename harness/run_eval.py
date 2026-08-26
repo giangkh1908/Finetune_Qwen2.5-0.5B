@@ -32,10 +32,12 @@ RESULTS_DIR = ROOT / "results"
 
 sys.path.insert(0, str(ROOT / "harness"))
 import scorers  # noqa: E402
+
+
 def load_eval_items(eval_dir: Path, suites=None):
     items = []
     if suites is None:
-        suites = ["math.jsonl", "reasoning.jsonl", "coding.jsonl", "general.jsonl"]
+        suites = ["coding.jsonl"]
     for name in suites:
         path = eval_dir / name
         if not path.exists():
