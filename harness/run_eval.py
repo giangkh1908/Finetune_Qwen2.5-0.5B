@@ -32,13 +32,14 @@ RESULTS_DIR = ROOT / "results"
 
 sys.path.insert(0, str(ROOT / "harness"))
 import scorers  # noqa: E402
-
-
-def load_eval_items(eval_dir: Path):
+def load_eval_items(eval_dir: Path, suites=None):
     items = []
-    for name in ["math.jsonl", "reasoning.jsonl", "coding.jsonl", "general.jsonl"]:
+    if suites is None:
+        suites = ["math.jsonl", "reasoning.jsonl", "coding.jsonl", "general.jsonl"]
+    for name in suites:
         path = eval_dir / name
         if not path.exists():
+            print(f"WARN: {name} not found, skip")
             continue
         with open(path, encoding="utf-8") as f:
             for line in f:
@@ -46,7 +47,6 @@ def load_eval_items(eval_dir: Path):
                 obj["_suite"] = name.replace(".jsonl", "")
                 items.append(obj)
     return items
-
 
 def verify_manifest(eval_dir: Path):
     mpath = eval_dir / "manifest.json"
@@ -248,13 +248,15 @@ def main():
     ap.add_argument("--score-only", default=None, help="path to outputs.jsonl to score without generation")
     ap.add_argument("--max-new-tokens", type=int, default=1024)
     ap.add_argument("--batch-size", type=int, default=40, help="batch size for --api mode (concurrent requests)")
+    ap.add_argument("--suites", default=None, help="comma-separated suite files to eval, e.g. coding.jsonl (default: all 4)")
     args = ap.parse_args()
 
     eval_dir = Path(args.eval_dir)
     out_dir = RESULTS_DIR / args.tag
     out_dir.mkdir(parents=True, exist_ok=True)
     verify_manifest(eval_dir)
-    items = load_eval_items(eval_dir)
+    suites = [s.strip() + (".jsonl" if not s.strip().endswith(".jsonl") else "") for s in args.suites.split(",")] if args.suites else None
+    items = load_eval_items(eval_dir, suites)
     print(f"loaded {len(items)} auto items from {eval_dir}")
 
     if args.score_only:
@@ -307,8 +309,9 @@ def main():
         print("-"*len(header))
         print(f"{'overall':<12} {len(results):>4}  {agg['overall']*100:5.1f}%")
     md = out_dir / "summary.md"
-    lines = [f"# {args.tag}", "", "| Model | Math | Coding | Reasoning | General | Avg |", "|---|---|---|---|---|---|"]
-    row = f"| {args.tag} | {agg.get('math',0)*100:.0f} | {agg.get('coding',0)*100:.0f} | {agg.get('reasoning',0)*100:.0f} | {agg.get('general',0)*100:.0f} | {agg.get('overall',0)*100:.1f} |"
+    suite_keys = [s for s in ["math", "reasoning", "coding", "general"] if s in agg]
+    lines = [f"# {args.tag}", "", "| Model | " + " | ".join(s.capitalize() for s in suite_keys) + " | Avg |", "|---" + "|---"*len(suite_keys) + "|"]
+    row = f"| {args.tag} | " + " | ".join(f"{agg[s]*100:.0f}" for s in suite_keys) + f" | {agg.get('overall',0)*100:.1f} |"
     lines.append(row)
     md.write_text("\n".join(lines), encoding="utf-8")
     return 0

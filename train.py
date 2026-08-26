@@ -1,28 +1,18 @@
-"""Fine-tune Qwen2.5-0.5B-Instruct on the Claude reasoning dataset (701x distil).
+"""Fine-tune Qwen2.5-Coder-0.5B-Instruct on the Claude coding dataset.
 
 Usage (on GPU, 24GB):
-    # LoRA r=8
-    python train.py --r 8 --max-seq-length 4096 --tag lora_r8
-    # LoRA r=32
-    python train.py --r 32 --max-seq-length 4096 --tag lora_r32
-    # QLoRA 4-bit r=32 (needs bitsandbytes)
-    python train.py --r 32 --qlora --max-seq-length 4096 --tag qlora_r32
+    # LoRA r=8 (code-only)
+    python train.py --r 8 --max-seq-length 4096 --epochs 1 --tag coder_r8
+    # QLoRA 4-bit (needs bitsandbytes)
+    python train.py --r 32 --qlora --max-seq-length 4096 --tag coder_qlora
 
 Outputs adapter -> outputs/<tag>/ (peft adapter_config.json + weights).
-Benchmark it with:
-    python harness/run_eval.py --model Qwen/Qwen2.5-0.5B-Instruct --adapter outputs/<tag> --tag <tag>
-
-Design:
-- chat template applied to the single user/assistant turn.
-- tokenized with truncation to max_seq_length (dataset is long: median ~6.5k tok,
-  so 4096 truncates; raising to 8192 keeps more but needs VRAM headroom).
-- labels mask out the USER portion so the model learns to generate the ANSWER,
-  not to repeat the prompt (completion-only LM).
-- standard Trainer: no TRL dependency, version-proof.
+Benchmark with:
+    python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct \
+        --adapter outputs/<tag> --tag <tag> --suites coding.jsonl
 """
 import argparse
 import json
-import os
 from pathlib import Path
 
 import torch
@@ -37,8 +27,8 @@ from transformers import (
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
 ROOT = Path(__file__).resolve().parent
-DATA = ROOT / "data" / "train" / "claude_opus_train_all.jsonl"
-MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
+DATA = ROOT / "data" / "train" / "coder_train_code_743.jsonl"
+MODEL_ID = "Qwen/Qwen2.5-Coder-0.5B-Instruct"
 RESPONSE_TEMPLATE = "\nassistant"  # Qwen chat marker before the assistant answer
 
 
@@ -46,27 +36,19 @@ def tokenize_example(example, tokenizer, max_seq_length):
     messages = example["messages"]
     prompt = tokenizer.apply_chat_template(
         [messages[0]], tokenize=False, add_generation_prompt=True
-    )  # up to "assistant\n"
+    )
     full = tokenizer.apply_chat_template(
         messages, tokenize=False, add_generation_prompt=False
-    )  # prompt + answer
+    )
     enc_full = tokenizer(full, truncation=True, max_length=max_seq_length)
-
     input_ids = enc_full["input_ids"]
-    # find where the assistant response begins to mask the prompt
-    prompt_ids = tokenizer(prompt, add_special_tokens=False)["input_ids"]
-    # locate prompt end within full (last "assistant\n" occurrence is robust)
-    labels = input_ids.copy()
-    # default: mask everything (we only un-mask the answer)
     labels = [-100] * len(input_ids)
-    # find the response marker position
-    # search for the last occurrence of the prompt's tail (assistant marker)
     tail = tokenizer(RESPONSE_TEMPLATE, add_special_tokens=False)["input_ids"]
     found = None
     if len(tail) >= 1:
         for i in range(len(input_ids) - len(tail), -1, -1):
             if input_ids[i:i + len(tail)] == tail:
-                found = i + len(tail)  # start of answer after marker
+                found = i + len(tail)
                 break
     if found is None:
         found = max(len(tail), 0)
@@ -77,11 +59,13 @@ def tokenize_example(example, tokenizer, max_seq_length):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--tag", default="lora_r8")
+    ap.add_argument("--tag", default="coder_r8")
+    ap.add_argument("--model", default=MODEL_ID, help="HF model id or local path")
+    ap.add_argument("--data", default=str(DATA), help="path to train jsonl")
     ap.add_argument("--r", type=int, default=8)
     ap.add_argument("--alpha", type=int, default=16)
     ap.add_argument("--lr", type=float, default=2e-4)
-    ap.add_argument("--epochs", type=int, default=3)
+    ap.add_argument("--epochs", type=int, default=1)
     ap.add_argument("--max-seq-length", type=int, default=4096)
     ap.add_argument("--batch-size", type=int, default=1)
     ap.add_argument("--grad-accum", type=int, default=8)
@@ -94,7 +78,7 @@ def main():
     out_dir = ROOT / "outputs" / args.tag
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
@@ -111,7 +95,7 @@ def main():
         }
 
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL_ID, trust_remote_code=True,
+        args.model, trust_remote_code=True,
         torch_dtype=torch.bfloat16, device_map="auto", **load_kwargs,
     )
     if args.qlora:
@@ -125,7 +109,7 @@ def main():
     model.print_trainable_parameters()
 
     rows = []
-    with open(DATA, encoding="utf-8") as f:
+    with open(args.data, encoding="utf-8") as f:
         for line in f:
             rows.append(json.loads(line))
     print(f"dataset: {len(rows)} rows")
@@ -133,9 +117,7 @@ def main():
     def map_fn(ex):
         return tokenize_example(ex, tokenizer, args.max_seq_length)
 
-    dataset = Dataset.from_list(rows).map(
-        map_fn, remove_columns=["messages"], batched=False
-    )
+    dataset = Dataset.from_list(rows).map(map_fn, remove_columns=["messages"], batched=False)
 
     training_args = TrainingArguments(
         output_dir=str(out_dir),

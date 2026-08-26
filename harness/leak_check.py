@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TRAIN = ROOT / "data" / "train" / "claude_opus_train_all.jsonl"
+TRAIN = ROOT / "data" / "train" / "coder_train_code_743.jsonl"
 EVAL_DIR = ROOT / "data" / "eval"
 
 
