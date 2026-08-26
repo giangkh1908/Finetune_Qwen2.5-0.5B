@@ -1,0 +1,400 @@
+{"messages": [{"role": "user", "content": "A number multiplied by 3 minus itself equals 12. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "Calculate 75 times 8 plus the difference of 75 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 667."}]}
+{"messages": [{"role": "user", "content": "Calculate 62 times 6 plus the difference of 62 and 6. Answer with a single number."}, {"role": "assistant", "content": "The answer is 428."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 3 minus itself equals 6. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 3."}]}
+{"messages": [{"role": "user", "content": "After applying a 60% reduction to 50, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "Calculate 70 times 5 plus the difference of 70 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 415."}]}
+{"messages": [{"role": "user", "content": "A sum of 12 is split into 3 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 4."}]}
+{"messages": [{"role": "user", "content": "A sum of 20 is split into 2 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Calculate 53 times 4 plus the difference of 53 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 261."}]}
+{"messages": [{"role": "user", "content": "A sum of 40 is split into 4 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 4 minus itself equals 24. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "Calculate 73 times 8 plus the difference of 73 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 649."}]}
+{"messages": [{"role": "user", "content": "After applying a 40% reduction to 300, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 180."}]}
+{"messages": [{"role": "user", "content": "A sum of 24 is split into 3 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 3 minus itself equals 14. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 3 consecutive integers starting from 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 6 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 30."}]}
+{"messages": [{"role": "user", "content": "Divide 81 by 27 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Divide 24 by 8 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "Divide 18 by 3 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "Divide 49 by 7 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 17."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 6 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 5 consecutive integers starting from 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 35."}]}
+{"messages": [{"role": "user", "content": "A sum of 24 is split into 2 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 77 times 4 plus the difference of 77 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 381."}]}
+{"messages": [{"role": "user", "content": "Calculate 36 times 3 plus the difference of 36 and 3. Answer with a single number."}, {"role": "assistant", "content": "The answer is 141."}]}
+{"messages": [{"role": "user", "content": "Calculate 95 times 7 plus the difference of 95 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 753."}]}
+{"messages": [{"role": "user", "content": "After applying a 40% reduction to 200, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 120."}]}
+{"messages": [{"role": "user", "content": "Calculate 47 times 4 plus the difference of 47 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 231."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 3 consecutive integers starting from 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 5 minus itself equals 32. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 11 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 110."}]}
+{"messages": [{"role": "user", "content": "Divide 54 by 6 and then add 2. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "A sum of 36 is split into 2 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 2 minus itself equals 7. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 4 consecutive integers starting from 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 22."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 4 minus itself equals 18. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "Divide 16 by 2 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "Divide 30 by 1 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 35."}]}
+{"messages": [{"role": "user", "content": "Divide 25 by 5 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 16."}]}
+{"messages": [{"role": "user", "content": "After applying a 30% reduction to 300, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 210."}]}
+{"messages": [{"role": "user", "content": "Calculate 50 times 8 plus the difference of 50 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 442."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 4 consecutive integers starting from 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 30."}]}
+{"messages": [{"role": "user", "content": "Calculate 50 times 2 plus the difference of 50 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 148."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 11? Answer with a single number."}, {"role": "assistant", "content": "The answer is 55."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 2, and 4. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "After applying a 10% reduction to 200, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 180."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 5 consecutive integers starting from 1? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 3, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 2 minus itself equals 2. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 2."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 4 minus itself equals 12. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 4."}]}
+{"messages": [{"role": "user", "content": "Divide 6 by 2 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "Divide 45 by 3 and then add 6. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 21."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 4 minus itself equals 9. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 3."}]}
+{"messages": [{"role": "user", "content": "A sum of 40 is split into 2 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 4 consecutive integers starting from 2? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "Calculate 65 times 7 plus the difference of 65 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 513."}]}
+{"messages": [{"role": "user", "content": "A sum of 12 is split into 2 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 10 and 11? Answer with a single number."}, {"role": "assistant", "content": "The answer is 110."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 4 consecutive integers starting from 1? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Calculate 15 times 7 plus the difference of 15 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 113."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 11 and 11? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "Divide 10 by 2 and then add 2. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 5, and 2. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 4 minus itself equals 15. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 4 consecutive integers starting from 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "Calculate 20 times 8 plus the difference of 20 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 172."}]}
+{"messages": [{"role": "user", "content": "A sum of 24 is split into 4 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 2 minus itself equals 3. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 3."}]}
+{"messages": [{"role": "user", "content": "After applying a 20% reduction to 50, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 40."}]}
+{"messages": [{"role": "user", "content": "Divide 27 by 1 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 34."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 5, 1, and 5. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "Calculate 27 times 4 plus the difference of 27 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 131."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 35."}]}
+{"messages": [{"role": "user", "content": "Calculate 84 times 2 plus the difference of 84 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 250."}]}
+{"messages": [{"role": "user", "content": "After applying a 20% reduction to 120, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 96."}]}
+{"messages": [{"role": "user", "content": "Divide 18 by 9 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "Calculate 62 times 2 plus the difference of 62 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 184."}]}
+{"messages": [{"role": "user", "content": "Calculate 92 times 9 plus the difference of 92 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 911."}]}
+{"messages": [{"role": "user", "content": "Calculate 95 times 4 plus the difference of 95 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 471."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 5 minus itself equals 8. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 2."}]}
+{"messages": [{"role": "user", "content": "Calculate 32 times 2 plus the difference of 32 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 94."}]}
+{"messages": [{"role": "user", "content": "Calculate 52 times 7 plus the difference of 52 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 409."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 3 minus itself equals 16. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "A sum of 20 is split into 4 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "A sum of 16 is split into 4 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 4."}]}
+{"messages": [{"role": "user", "content": "After applying a 30% reduction to 50, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 35."}]}
+{"messages": [{"role": "user", "content": "Divide 27 by 9 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 3 consecutive integers starting from 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 21."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 3 minus itself equals 4. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 2."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 4 minus itself equals 21. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 5 minus itself equals 16. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 4."}]}
+{"messages": [{"role": "user", "content": "Divide 35 by 7 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 2 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "Divide 48 by 12 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 5, 1, and 3. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 4, 1, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 3 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 5 consecutive integers starting from 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 40."}]}
+{"messages": [{"role": "user", "content": "Divide 14 by 1 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 22."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 3 consecutive integers starting from 1? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 12 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 60."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 6 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 4 consecutive integers starting from 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 26."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 9? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "Divide 27 by 1 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 38."}]}
+{"messages": [{"role": "user", "content": "After applying a 10% reduction to 50, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 45."}]}
+{"messages": [{"role": "user", "content": "Divide 32 by 1 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 43."}]}
+{"messages": [{"role": "user", "content": "Calculate 85 times 6 plus the difference of 85 and 6. Answer with a single number."}, {"role": "assistant", "content": "The answer is 589."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 63."}]}
+{"messages": [{"role": "user", "content": "Divide 63 by 9 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "After applying a 20% reduction to 150, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 120."}]}
+{"messages": [{"role": "user", "content": "After applying a 20% reduction to 300, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 240."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 2 minus itself equals 6. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 3 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 21."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 3 minus itself equals 10. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "Calculate 16 times 5 plus the difference of 16 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 91."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 10 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 30."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 5 consecutive integers starting from 2? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 2 minus itself equals 4. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 4."}]}
+{"messages": [{"role": "user", "content": "Calculate 75 times 3 plus the difference of 75 and 3. Answer with a single number."}, {"role": "assistant", "content": "The answer is 297."}]}
+{"messages": [{"role": "user", "content": "Calculate 68 times 9 plus the difference of 68 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 671."}]}
+{"messages": [{"role": "user", "content": "Calculate 39 times 7 plus the difference of 39 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 305."}]}
+{"messages": [{"role": "user", "content": "Calculate 23 times 6 plus the difference of 23 and 6. Answer with a single number."}, {"role": "assistant", "content": "The answer is 155."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 4, 2, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 4 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 4 minus itself equals 6. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 2."}]}
+{"messages": [{"role": "user", "content": "A sum of 30 is split into 3 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Calculate 59 times 9 plus the difference of 59 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 581."}]}
+{"messages": [{"role": "user", "content": "Calculate 38 times 8 plus the difference of 38 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 334."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 5 consecutive integers starting from 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 30."}]}
+{"messages": [{"role": "user", "content": "Divide 56 by 7 and then add 1. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 45."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 10 and 12? Answer with a single number."}, {"role": "assistant", "content": "The answer is 60."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 72."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 3 consecutive integers starting from 2? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "After applying a 70% reduction to 150, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 45."}]}
+{"messages": [{"role": "user", "content": "Divide 18 by 6 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Divide 45 by 15 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 4, 1, and 3. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 6 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 30."}]}
+{"messages": [{"role": "user", "content": "Divide 24 by 1 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 32."}]}
+{"messages": [{"role": "user", "content": "After applying a 70% reduction to 50, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 3 minus itself equals 8. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 4."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 2 minus itself equals 8. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Divide 54 by 6 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 17."}]}
+{"messages": [{"role": "user", "content": "Divide 35 by 1 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 45."}]}
+{"messages": [{"role": "user", "content": "After applying a 10% reduction to 80, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 72."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 3 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 24."}]}
+{"messages": [{"role": "user", "content": "Divide 40 by 20 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "Divide 56 by 14 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "After applying a 70% reduction to 300, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 90."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 8, 3, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 90 times 5 plus the difference of 90 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 535."}]}
+{"messages": [{"role": "user", "content": "Divide 10 by 2 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Divide 16 by 4 and then add 4. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 3 and 12? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 9, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 28."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 6, 1, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 90."}]}
+{"messages": [{"role": "user", "content": "Divide 21 by 3 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 16."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 9? Answer with a single number."}, {"role": "assistant", "content": "The answer is 63."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 3 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 30."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 8 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 40."}]}
+{"messages": [{"role": "user", "content": "After applying a 30% reduction to 120, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 84."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 11? Answer with a single number."}, {"role": "assistant", "content": "The answer is 77."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 5 minus itself equals 12. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 3."}]}
+{"messages": [{"role": "user", "content": "Calculate 96 times 5 plus the difference of 96 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 571."}]}
+{"messages": [{"role": "user", "content": "After applying a 60% reduction to 250, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 100."}]}
+{"messages": [{"role": "user", "content": "After applying a 70% reduction to 250, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 75."}]}
+{"messages": [{"role": "user", "content": "Calculate 62 times 4 plus the difference of 62 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 306."}]}
+{"messages": [{"role": "user", "content": "Divide 24 by 2 and then add 1. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 3 and 11? Answer with a single number."}, {"role": "assistant", "content": "The answer is 33."}]}
+{"messages": [{"role": "user", "content": "After applying a 70% reduction to 80, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 24."}]}
+{"messages": [{"role": "user", "content": "A sum of 36 is split into 4 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "After applying a 70% reduction to 200, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 60."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 8 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 24."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 4, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "Divide 36 by 2 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 26."}]}
+{"messages": [{"role": "user", "content": "Divide 15 by 1 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 2 minus itself equals 5. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "Divide 18 by 2 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 19."}]}
+{"messages": [{"role": "user", "content": "After applying a 30% reduction to 200, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 140."}]}
+{"messages": [{"role": "user", "content": "Calculate 63 times 5 plus the difference of 63 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 373."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "After applying a 30% reduction to 250, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 175."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 4, and 5. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 4 and 9? Answer with a single number."}, {"role": "assistant", "content": "The answer is 36."}]}
+{"messages": [{"role": "user", "content": "Divide 45 by 3 and then add 2. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 17."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 8, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Divide 42 by 1 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 45."}]}
+{"messages": [{"role": "user", "content": "Calculate 79 times 7 plus the difference of 79 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 625."}]}
+{"messages": [{"role": "user", "content": "Divide 42 by 7 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "After applying a 30% reduction to 80, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 56."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 3 consecutive integers starting from 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "Divide 45 by 15 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 12 and 12? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 19 times 4 plus the difference of 19 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 91."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 1, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 4."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 1 and then add 2. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "Divide 9 by 3 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 25 times 2 plus the difference of 25 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 73."}]}
+{"messages": [{"role": "user", "content": "Calculate 79 times 2 plus the difference of 79 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 235."}]}
+{"messages": [{"role": "user", "content": "Calculate 42 times 5 plus the difference of 42 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 247."}]}
+{"messages": [{"role": "user", "content": "After applying a 60% reduction to 200, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 80."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 4, 3, and 4. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "After applying a 40% reduction to 150, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 90."}]}
+{"messages": [{"role": "user", "content": "Calculate 23 times 7 plus the difference of 23 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 177."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 5, and 3. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Divide 25 by 1 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 34."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 12 and 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 12 and 9? Answer with a single number."}, {"role": "assistant", "content": "The answer is 36."}]}
+{"messages": [{"role": "user", "content": "Calculate 21 times 5 plus the difference of 21 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 121."}]}
+{"messages": [{"role": "user", "content": "After applying a 20% reduction to 200, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 160."}]}
+{"messages": [{"role": "user", "content": "Divide 4 by 2 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 4, and 3. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "Calculate 90 times 7 plus the difference of 90 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 713."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 30."}]}
+{"messages": [{"role": "user", "content": "A sum of 12 is split into 4 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 3."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 12 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Divide 21 by 3 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Calculate 67 times 9 plus the difference of 67 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 661."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 12? Answer with a single number."}, {"role": "assistant", "content": "The answer is 84."}]}
+{"messages": [{"role": "user", "content": "Divide 24 by 3 and then add 1. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "Divide 45 by 5 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "Calculate 71 times 5 plus the difference of 71 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 421."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 4, 3, and 3. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Divide 56 by 4 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 17."}]}
+{"messages": [{"role": "user", "content": "Calculate 56 times 9 plus the difference of 56 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 551."}]}
+{"messages": [{"role": "user", "content": "Calculate 14 times 4 plus the difference of 14 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 66."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 8 and 11? Answer with a single number."}, {"role": "assistant", "content": "The answer is 88."}]}
+{"messages": [{"role": "user", "content": "Calculate 19 times 8 plus the difference of 19 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 163."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 8 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 56."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 8 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "A sum of 36 is split into 3 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 77 times 8 plus the difference of 77 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 685."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 1 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 19."}]}
+{"messages": [{"role": "user", "content": "Calculate 50 times 3 plus the difference of 50 and 3. Answer with a single number."}, {"role": "assistant", "content": "The answer is 197."}]}
+{"messages": [{"role": "user", "content": "Divide 27 by 3 and then add 6. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "Divide 27 by 1 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 32."}]}
+{"messages": [{"role": "user", "content": "Calculate 73 times 2 plus the difference of 73 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 217."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 11 and 12? Answer with a single number."}, {"role": "assistant", "content": "The answer is 132."}]}
+{"messages": [{"role": "user", "content": "Divide 21 by 3 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "Calculate 36 times 2 plus the difference of 36 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 106."}]}
+{"messages": [{"role": "user", "content": "Calculate 66 times 6 plus the difference of 66 and 6. Answer with a single number."}, {"role": "assistant", "content": "The answer is 456."}]}
+{"messages": [{"role": "user", "content": "Divide 45 by 5 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 19."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 4 and 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 13 times 5 plus the difference of 13 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 73."}]}
+{"messages": [{"role": "user", "content": "Divide 35 by 1 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 43."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 5, 2, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 4, and 2. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Calculate 40 times 3 plus the difference of 40 and 3. Answer with a single number."}, {"role": "assistant", "content": "The answer is 157."}]}
+{"messages": [{"role": "user", "content": "Calculate 37 times 6 plus the difference of 37 and 6. Answer with a single number."}, {"role": "assistant", "content": "The answer is 253."}]}
+{"messages": [{"role": "user", "content": "Divide 63 by 3 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 28."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 4 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "Divide 4 by 1 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 14."}]}
+{"messages": [{"role": "user", "content": "Calculate 70 times 6 plus the difference of 70 and 6. Answer with a single number."}, {"role": "assistant", "content": "The answer is 484."}]}
+{"messages": [{"role": "user", "content": "Calculate 13 times 2 plus the difference of 13 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 37."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 8 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 40."}]}
+{"messages": [{"role": "user", "content": "What is the sum of the 5 consecutive integers starting from 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 25."}]}
+{"messages": [{"role": "user", "content": "Calculate 61 times 5 plus the difference of 61 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 361."}]}
+{"messages": [{"role": "user", "content": "A sum of 16 is split into 2 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Divide 10 by 5 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "Divide 56 by 7 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 16."}]}
+{"messages": [{"role": "user", "content": "Divide 32 by 1 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 41."}]}
+{"messages": [{"role": "user", "content": "Calculate 26 times 8 plus the difference of 26 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 226."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 11 and 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 44."}]}
+{"messages": [{"role": "user", "content": "Calculate 64 times 2 plus the difference of 64 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 190."}]}
+{"messages": [{"role": "user", "content": "After applying a 10% reduction to 250, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 225."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 12? Answer with a single number."}, {"role": "assistant", "content": "The answer is 36."}]}
+{"messages": [{"role": "user", "content": "Calculate 74 times 7 plus the difference of 74 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 585."}]}
+{"messages": [{"role": "user", "content": "Divide 42 by 7 and then add 4. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Calculate 35 times 4 plus the difference of 35 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 171."}]}
+{"messages": [{"role": "user", "content": "Calculate 13 times 6 plus the difference of 13 and 6. Answer with a single number."}, {"role": "assistant", "content": "The answer is 85."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 12 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 24."}]}
+{"messages": [{"role": "user", "content": "After applying a 20% reduction to 250, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 200."}]}
+{"messages": [{"role": "user", "content": "Divide 20 by 4 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Calculate 59 times 8 plus the difference of 59 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 523."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 12? Answer with a single number."}, {"role": "assistant", "content": "The answer is 60."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 1, and 5. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 5 minus itself equals 20. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "Calculate 70 times 9 plus the difference of 70 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 691."}]}
+{"messages": [{"role": "user", "content": "After applying a 60% reduction to 80, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 32."}]}
+{"messages": [{"role": "user", "content": "Divide 35 by 1 and then add 6. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 41."}]}
+{"messages": [{"role": "user", "content": "Calculate 48 times 9 plus the difference of 48 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 471."}]}
+{"messages": [{"role": "user", "content": "Calculate 62 times 7 plus the difference of 62 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 489."}]}
+{"messages": [{"role": "user", "content": "Divide 48 by 3 and then add 4. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 1, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "Divide 8 by 2 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 4 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 28."}]}
+{"messages": [{"role": "user", "content": "Calculate 87 times 7 plus the difference of 87 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 689."}]}
+{"messages": [{"role": "user", "content": "Divide 16 by 8 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "After applying a 40% reduction to 80, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 48."}]}
+{"messages": [{"role": "user", "content": "Divide 56 by 4 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 23."}]}
+{"messages": [{"role": "user", "content": "After applying a 60% reduction to 150, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 60."}]}
+{"messages": [{"role": "user", "content": "Calculate 22 times 8 plus the difference of 22 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 190."}]}
+{"messages": [{"role": "user", "content": "A sum of 30 is split into 2 equal parts. How large is each part? Answer with a single number."}, {"role": "assistant", "content": "The answer is 15."}]}
+{"messages": [{"role": "user", "content": "A number multiplied by 5 minus itself equals 24. What is the number? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "Divide 30 by 6 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Calculate 74 times 4 plus the difference of 74 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 366."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 5, 1, and 2. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Calculate 44 times 8 plus the difference of 44 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 388."}]}
+{"messages": [{"role": "user", "content": "After applying a 40% reduction to 250, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 150."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 5, 2, and 3. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Divide 28 by 4 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "Calculate 94 times 7 plus the difference of 94 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 745."}]}
+{"messages": [{"role": "user", "content": "Divide 15 by 1 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 26."}]}
+{"messages": [{"role": "user", "content": "Calculate 93 times 2 plus the difference of 93 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 277."}]}
+{"messages": [{"role": "user", "content": "Calculate 58 times 5 plus the difference of 58 and 5. Answer with a single number."}, {"role": "assistant", "content": "The answer is 343."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 35."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 11 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 77."}]}
+{"messages": [{"role": "user", "content": "Divide 42 by 1 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 53."}]}
+{"messages": [{"role": "user", "content": "Calculate 98 times 7 plus the difference of 98 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 777."}]}
+{"messages": [{"role": "user", "content": "Divide 42 by 7 and then add 2. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 3 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 3."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 6 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 42."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 4, and 2. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 6 and 9? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "Divide 27 by 3 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "Divide 32 by 4 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 9 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "After applying a 30% reduction to 150, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 105."}]}
+{"messages": [{"role": "user", "content": "Divide 36 by 12 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 6, 2, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "Calculate 80 times 7 plus the difference of 80 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 633."}]}
+{"messages": [{"role": "user", "content": "Divide 16 by 2 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 16."}]}
+{"messages": [{"role": "user", "content": "Calculate 86 times 3 plus the difference of 86 and 3. Answer with a single number."}, {"role": "assistant", "content": "The answer is 341."}]}
+{"messages": [{"role": "user", "content": "Divide 63 by 7 and then add 4. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "Divide 27 by 1 and then add 1. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 28."}]}
+{"messages": [{"role": "user", "content": "Calculate 58 times 4 plus the difference of 58 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 286."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 10, 1, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 55 times 9 plus the difference of 55 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 541."}]}
+{"messages": [{"role": "user", "content": "Calculate 36 times 9 plus the difference of 36 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 351."}]}
+{"messages": [{"role": "user", "content": "Divide 21 by 1 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 29."}]}
+{"messages": [{"role": "user", "content": "Calculate 99 times 7 plus the difference of 99 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 785."}]}
+{"messages": [{"role": "user", "content": "Divide 36 by 6 and then add 1. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "Calculate 35 times 9 plus the difference of 35 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 341."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 70."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 3 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 3, and 4. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 10 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 40."}]}
+{"messages": [{"role": "user", "content": "After applying a 10% reduction to 300, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 270."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "Divide 36 by 4 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 16."}]}
+{"messages": [{"role": "user", "content": "After applying a 60% reduction to 300, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 120."}]}
+{"messages": [{"role": "user", "content": "Calculate 95 times 2 plus the difference of 95 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 283."}]}
+{"messages": [{"role": "user", "content": "Calculate 95 times 3 plus the difference of 95 and 3. Answer with a single number."}, {"role": "assistant", "content": "The answer is 377."}]}
+{"messages": [{"role": "user", "content": "Calculate 21 times 2 plus the difference of 21 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 61."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 4 and then add 6. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "Calculate 78 times 4 plus the difference of 78 and 4. Answer with a single number."}, {"role": "assistant", "content": "The answer is 386."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 2, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 6 and then add 1. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 3."}]}
+{"messages": [{"role": "user", "content": "Divide 14 by 7 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 2, 5, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Calculate 47 times 9 plus the difference of 47 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 461."}]}
+{"messages": [{"role": "user", "content": "Divide 48 by 3 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 26."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 6 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 24."}]}
+{"messages": [{"role": "user", "content": "Divide 35 by 5 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 16."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 6, 3, and 2. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "Divide 20 by 4 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Calculate 46 times 2 plus the difference of 46 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 136."}]}
+{"messages": [{"role": "user", "content": "Divide 12 by 4 and then add 7. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Calculate 18 times 2 plus the difference of 18 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 52."}]}
+{"messages": [{"role": "user", "content": "Calculate 14 times 7 plus the difference of 14 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 105."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 10 and 10? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Divide 64 by 2 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 37."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 4, 4, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 4, 2, and 4. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Divide 15 by 3 and then add 8. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 13."}]}
+{"messages": [{"role": "user", "content": "Divide 25 by 5 and then add 6. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 11."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 3? Answer with a single number."}, {"role": "assistant", "content": "The answer is 21."}]}
+{"messages": [{"role": "user", "content": "Calculate 17 times 2 plus the difference of 17 and 2. Answer with a single number."}, {"role": "assistant", "content": "The answer is 49."}]}
+{"messages": [{"role": "user", "content": "After applying a 60% reduction to 120, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 48."}]}
+{"messages": [{"role": "user", "content": "Calculate 97 times 3 plus the difference of 97 and 3. Answer with a single number."}, {"role": "assistant", "content": "The answer is 385."}]}
+{"messages": [{"role": "user", "content": "Calculate 91 times 8 plus the difference of 91 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 811."}]}
+{"messages": [{"role": "user", "content": "Calculate 53 times 9 plus the difference of 53 and 9. Answer with a single number."}, {"role": "assistant", "content": "The answer is 521."}]}
+{"messages": [{"role": "user", "content": "A triangle has side lengths 3, 2, and 1. What is its perimeter? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "Divide 9 by 3 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 6."}]}
+{"messages": [{"role": "user", "content": "Divide 14 by 7 and then add 5. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 6 and 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 12."}]}
+{"messages": [{"role": "user", "content": "Divide 35 by 5 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 18."}]}
+{"messages": [{"role": "user", "content": "Divide 24 by 4 and then add 10. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 16."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 7? Answer with a single number."}, {"role": "assistant", "content": "The answer is 7."}]}
+{"messages": [{"role": "user", "content": "After applying a 20% reduction to 80, what remains? Answer with a single number."}, {"role": "assistant", "content": "The answer is 64."}]}
+{"messages": [{"role": "user", "content": "Divide 48 by 2 and then add 9. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 33."}]}
+{"messages": [{"role": "user", "content": "Divide 48 by 1 and then add 4. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 52."}]}
+{"messages": [{"role": "user", "content": "Divide 63 by 3 and then add 11. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 32."}]}
+{"messages": [{"role": "user", "content": "Divide 35 by 7 and then add 3. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 8."}]}
+{"messages": [{"role": "user", "content": "Calculate 19 times 7 plus the difference of 19 and 7. Answer with a single number."}, {"role": "assistant", "content": "The answer is 145."}]}
+{"messages": [{"role": "user", "content": "Divide 40 by 1 and then add 1. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 41."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 8? Answer with a single number."}, {"role": "assistant", "content": "The answer is 40."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 7 and 6? Answer with a single number."}, {"role": "assistant", "content": "The answer is 42."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 10 and 4? Answer with a single number."}, {"role": "assistant", "content": "The answer is 20."}]}
+{"messages": [{"role": "user", "content": "Calculate 90 times 8 plus the difference of 90 and 8. Answer with a single number."}, {"role": "assistant", "content": "The answer is 802."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 10 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 10."}]}
+{"messages": [{"role": "user", "content": "Divide 24 by 8 and then add 6. What is the result? Answer with a single number."}, {"role": "assistant", "content": "The answer is 9."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 11 and 9? Answer with a single number."}, {"role": "assistant", "content": "The answer is 99."}]}
+{"messages": [{"role": "user", "content": "What is the smallest positive number that is a multiple of both 5 and 5? Answer with a single number."}, {"role": "assistant", "content": "The answer is 5."}]}
