@@ -5,3 +5,4 @@ peft>=0.10
 datasets>=2.18
 fastapi>=0.110
 uvicorn>=0.29
+bitsandbytes>=0.43
