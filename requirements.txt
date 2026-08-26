@@ -3,3 +3,5 @@ torch>=2.1
 accelerate>=0.27
 peft>=0.10
 datasets>=2.18
+fastapi>=0.110
+uvicorn>=0.29
