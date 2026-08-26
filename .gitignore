@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+
+# Models & large weights
+*.bin
+*.safetensors
+*.ckpt
+outputs/
+checkpoints/
+
+# Data raw (đã có clean, không cần push raw 20MB)
+data/raw/
+
+# Results - giữ result.json, bỏ outputs raw nếu nặng (tuỳ)
+# results/*/outputs*.jsonl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

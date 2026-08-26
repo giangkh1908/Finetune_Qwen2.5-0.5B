@@ -1,0 +1,28 @@
+{
+  "seed": 20260826,
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "files": {
+    "math.jsonl": {
+      "count": 50,
+      "sha256": "70a2d79b266567e5a77ec1afd7959fb161ce9e3c633cc38b7d0b4ac0b9d4ca70"
+    },
+    "reasoning.jsonl": {
+      "count": 40,
+      "sha256": "8a1f9bb4586aa6794f10f63ee52d71a0f498bd34180b9caab2d090336f330ebd"
+    },
+    "coding.jsonl": {
+      "count": 24,
+      "sha256": "e535e361deea1944a117b580a7ee4b417584236e84951ecc0891736e4205d853"
+    },
+    "general.jsonl": {
+      "count": 36,
+      "sha256": "4791c2719a119af0d18219429149d51977505fde376a411aa6bf86df42b5bdbd"
+    },
+    "qualitative.jsonl": {
+      "count": 24,
+      "sha256": "a204d283bb5e43f8c65ae72de7c315c505f8a950c7ff23bd2b120347147e1232"
+    }
+  },
+  "total_auto": 150,
+  "total_qualitative": 24
+}
