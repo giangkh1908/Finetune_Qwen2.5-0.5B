@@ -304,6 +304,7 @@ Adapter code cũ `giangkh19/qwen-0.5b-coder-r8` vẫn còn trên HF (thí nghi�
 |--------|-----------|
 | vLLM startup fail `ncclCommResume` / undefined symbol | torch bị kéo bản cu12.9/cu13 (mặc định PyPI) trong khi driver chỉ 550 — cài lại đúng §2 nhánh A: torch `2.6.0+cu124` + `vllm==0.8.5`. Đừng `pip install -U vllm` |
 | vLLM 0.28 crash lúc start với lỗi `nvcc not found` / flashinfer JIT / top_k_renorm | `export VLLM_USE_FLASHINFER_SAMPLER=0` rồi serve lại — image không có CUDA Toolkit, sampler kernel cần nvcc JIT. Đã kiểm chứng trên 3090/driver 590 (27/8/2026). Không ảnh hưởng kết quả benchmark (temperature=0) |
+| 404 `The model qwen-coder does not exist` khi benchmark | Server serve **thiếu `--served-model-name qwen-coder`** → model chỉ đăng ký id gốc. `curl /v1/models` kiểm tra id thật; serve lại đủ flag, hoặc truyền `--api-model <id-thật>`. run_eval resume theo `--tag`, không mất công chạy lại |
 | `pip install vllm` kéo torch mới đè cu124 (nhánh A) | Dùng `pip install vllm==0.8.5 --extra-index-url https://download.pytorch.org/whl/cu124`, kiểm tra `torch.__version__` còn `+cu124` |
 | `ERROR: manifest mismatch` | `data/eval/` đã bị sửa sau freeze — `git checkout data/eval/` khôi phục, đừng tự vá hash |
 | `No space left` | torch cu124 + vllm ~8GB; dọn `~/.cache/pip` hoặc clone model bằng `HF_HOME` chỉ định ổ còn trống |
