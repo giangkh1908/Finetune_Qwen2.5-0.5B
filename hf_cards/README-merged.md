@@ -11,8 +11,6 @@ tags:
 library_name: transformers
 language:
 - en
-datasets:
-- channudambal/pandas-finetune
 ---
 
 # Qwen2.5-Coder-0.5B — Text-to-Pandas (merged, LoRA r=8)

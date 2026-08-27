@@ -24,7 +24,7 @@ LoRA adapter for **Qwen/Qwen2.5-Coder-0.5B-Instruct**, fine-tuned on 80k WikiSQL
 
 ## Training
 
-LoRA r=8, alpha=16, target `q,k,v,o,gate,up,down_proj`, dropout 0.05 · lr 2e-4 · 1 epoch · effective batch 16 · seq 512 · completion-only masking · RTX 3090 bf16 ~2h10m. Full pipeline and dataset builder: [GitHub](https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B).
+LoRA r=8, alpha=16, target `q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj`, dropout 0.05 · lr 2e-4 · 1 epoch · effective batch 16 · seq 512 · completion-only masking · RTX 3090 bf16 ~2h10m. Full pipeline and dataset builder: [GitHub](https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B).
 
 ## Usage
 
