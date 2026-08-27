@@ -252,8 +252,8 @@ python3 harness/compare.py pandas_base pandas_r8
 
 | Model | Data | Eval | Kết quả | Δ vs base |
 |-------|------|------|---------|-----------|
-| Qwen-Coder 0.5B base | — | 6k pandas | *(chưa chạy — điền sau §3)* | — |
-| **+ LoRA r=8** | 80k pandas (lưu ý overlap §8) | 6k pandas | *(chưa chạy — điền sau §5)* | — |
+| Qwen-Coder 0.5B base | — | 6k pandas | **0.0%** (trả SQL 46% / văn xuôi 53% — không biết format pandas) | — |
+| **+ LoRA r=8** | 80k pandas (lưu ý overlap §8) | 6k pandas | **79.1%** (27/8/2026, 3090/driver 590/vLLM 0.28) | **+79.1 pts** |
 
 > Kinh nghiệm từ thí nghiệm code cũ (đã archive trong git history): catastrophic forgetting xảy ra khi data lệch domain + truncate 40% sample; sửa bằng data đúng domain, chunk/không truncate, 1 epoch. Ở pandas: seq 512 phủ 100% samples (max ~350 tok) nên không có rủi ro truncate.
 
