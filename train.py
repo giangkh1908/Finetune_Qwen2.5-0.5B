@@ -106,8 +106,8 @@ def main():
         r=args.r, lora_alpha=args.alpha, target_modules=targets,
         lora_dropout=args.lora_dropout, bias="none", task_type="CAUSAL_LM",
     ))
+    model.enable_input_require_grads()  # needed for gradient checkpointing + LoRA
     model.print_trainable_parameters()
-
     rows = []
     with open(args.data, encoding="utf-8") as f:
         for line in f:
