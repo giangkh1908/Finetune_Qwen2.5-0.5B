@@ -1,4 +1,4 @@
-"""Lightweight OpenAI-compatible server for Qwen2.5-0.5B-Instruct.
+"""Lightweight OpenAI-compatible server for Qwen2.5-Coder-0.5B-Instruct.
 
 Why not vLLM: vLLM 0.28 needs FlashInfer which JIT-compiles CUDA kernels at
 runtime, requiring nvcc + ninja (not installed). This server uses plain
@@ -11,7 +11,7 @@ Endpoints (OpenAI-compatible):
 
 Usage:
     pip install fastapi uvicorn transformers torch
-    MODEL=Qwen/Qwen2.5-0.5B-Instruct PORT=8000 python serving/server.py
+    MODEL=Qwen/Qwen2.5-Coder-0.5B-Instruct PORT=8000 python serving/server.py
 """
 import os
 import threading
@@ -20,7 +20,7 @@ import torch
 from fastapi import FastAPI, Request
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-MODEL = os.environ.get("MODEL", "Qwen/Qwen2.5-0.5B-Instruct")
+MODEL = os.environ.get("MODEL", "Qwen/Qwen2.5-Coder-0.5B-Instruct")
 PORT = int(os.environ.get("PORT", "8000"))
 DEFAULT_MAX_TOKENS = int(os.environ.get("DEFAULT_MAX_TOKENS", "1536"))
 

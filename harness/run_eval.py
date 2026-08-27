@@ -1,17 +1,18 @@
-"""Run the frozen benchmark on a model (generate) and/or score existing outputs.
+"""Run the frozen text-to-pandas benchmark on a model (generate) and/or score outputs.
 
-Modes:
-  1) Direct (Colab/GPU thuê load model):
-     python harness/run_eval.py --model Qwen/Qwen2.5-0.5B-Instruct --tag base_before
+modes:
+  1) Direct (GPU thuê load model):
+     python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag pandas_base
 
-  2) API serving (GPU serve vLLM, client gọi batch):
+  2) API serving (vLLM 0.8.5 + torch 2.6.0+cu124, xem README §2):
      # terminal 1: serve
-     python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-0.5B-Instruct --port 8000
+     vllm serve Qwen/Qwen2.5-Coder-0.5B-Instruct --port 8000 --served-model-name qwen-coder \
+       --gpu-memory-utilization 0.8 --max-model-len 8192 --enable-prefix-caching
      # terminal 2: benchmark qua API (không cần torch, chạy ở laptop cũng được)
-     python harness/run_eval.py --api http://localhost:8000/v1 --tag base_before --batch-size 40
+     python harness/run_eval.py --api http://localhost:8000/v1 --api-model qwen-coder --tag pandas_base --batch-size 40
 
   3) Score-only (đã có outputs.jsonl):
-     python harness/run_eval.py --score-only results/base_before/outputs.jsonl --tag base_before
+     python harness/run_eval.py --score-only results/pandas_base/outputs.jsonl --tag pandas_base
 
 Outputs:
     results/<tag>/outputs.jsonl   (raw model responses)
@@ -61,7 +62,9 @@ def verify_manifest(eval_dir: Path):
         if not path.exists():
             print(f"WARN: manifest lists {name} but file missing")
             continue
-        h = hashlib.sha256(path.read_bytes()).hexdigest()
+        # Builders write with newline="\n" (LF); Windows checkouts/editors may
+        # rewrite as CRLF. Content-hash must be line-ending agnostic.
+        h = hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
         if h != info["sha256"]:
             print(f"ERROR: manifest mismatch for {name}")
             print(f"  expected {info['sha256']}")
@@ -143,7 +146,7 @@ def generate_with_model(model_id, adapter, items, out_path, max_new_tokens=1024)
         messages = [{"role": "user", "content": prompt}]
         text = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
         inputs = tok([text], return_tensors="pt").to(model.device)
-        budget = 1536 if it["_suite"] == "coding" else max_new_tokens
+        budget = max_new_tokens
         with torch.no_grad():
             out = model.generate(**inputs, max_new_tokens=budget, do_sample=False, temperature=0, pad_token_id=tok.eos_token_id)
         gen = tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
@@ -184,9 +187,9 @@ def generate_via_api(api_base, api_key, model_name, items, out_path, batch_size=
         if it["id"] in existing:
             return None
         prompt = it["prompt"]
-        budget = 1536 if it["_suite"] == "coding" else max_new_tokens
+        budget = max_new_tokens
         payload = {
-            "model": model_name or "Qwen/Qwen2.5-0.5B-Instruct",
+            "model": model_name or "Qwen/Qwen2.5-Coder-0.5B-Instruct",
             "messages": [{"role": "user", "content": prompt}],
             "temperature": 0,
             "max_tokens": budget,
@@ -243,14 +246,15 @@ def main():
     g.add_argument("--model", default=None, help="HF model id (direct mode)")
     g.add_argument("--api", default=None, help="OpenAI-compatible API base, e.g. http://localhost:8000/v1")
     ap.add_argument("--api-key", default=None, help="API key if needed")
-    ap.add_argument("--api-model", default=None, help="model name for API (default Qwen/Qwen2.5-0.5B-Instruct)")
+    ap.add_argument("--api-model", default=None, help="model name for API (default Qwen/Qwen2.5-Coder-0.5B-Instruct)")
     ap.add_argument("--adapter", default=None, help="optional LoRA adapter path (direct mode only)")
-    ap.add_argument("--tag", required=True, help="run tag, e.g. base_before / lora_r8")
+    ap.add_argument("--tag", required=True, help="run tag, e.g. pandas_base / pandas_r8")
     ap.add_argument("--eval-dir", default=str(EVAL_DIR))
     ap.add_argument("--score-only", default=None, help="path to outputs.jsonl to score without generation")
-    ap.add_argument("--max-new-tokens", type=int, default=1024)
+    ap.add_argument("--max-new-tokens", type=int, default=128,
+                    help="pandas queries are short; keep small so 6k runs fast")
     ap.add_argument("--batch-size", type=int, default=40, help="batch size for --api mode (concurrent requests)")
-    ap.add_argument("--suites", default=None, help="comma-separated suite files to eval, e.g. coding.jsonl (default: all 4)")
+    ap.add_argument("--suites", default=None, help="comma-separated suite files to eval, e.g. pandas_eval_500.jsonl (default: pandas_eval_6k.jsonl)")
     args = ap.parse_args()
 
     eval_dir = Path(args.eval_dir)
@@ -269,26 +273,10 @@ def main():
             if args.adapter:
                 print("WARN: --adapter ignored in --api mode (adapter phải merge ở server)")
             generate_via_api(args.api, args.api_key, args.api_model, items, outputs_path, batch_size=args.batch_size, max_new_tokens=args.max_new_tokens)
-            # qualitative cũng qua API batch
-            qual_path = eval_dir / "qualitative.jsonl"
-            if qual_path.exists():
-                with open(qual_path, encoding="utf-8") as f:
-                    qual_items = [json.loads(l) for l in f]
-                for qi in qual_items: qi["_suite"] = "qualitative"
-                qual_out = out_dir / "outputs_qualitative.jsonl"
-                generate_via_api(args.api, args.api_key, args.api_model, qual_items, qual_out, batch_size=args.batch_size, max_new_tokens=1536)
         else:
             if not args.model:
                 ap.error("cần --model hoặc --api hoặc --score-only")
             generate_with_model(args.model, args.adapter, items, outputs_path, args.max_new_tokens)
-            qual_path = eval_dir / "qualitative.jsonl"
-            if qual_path.exists():
-                with open(qual_path, encoding="utf-8") as f:
-                    qual_items = [json.loads(l) for l in f]
-                for qi in qual_items: qi["_suite"] = "qualitative"
-                qual_out = out_dir / "outputs_qualitative.jsonl"
-                generate_with_model(args.model, args.adapter, qual_items, qual_out, 1536)
-
     outputs_by_id = {}
     with open(outputs_path, encoding="utf-8") as f:
         for line in f:
@@ -303,16 +291,15 @@ def main():
     print("\n=== Benchmark ===")
     header = f"{'suite':<12} {'n':>4}  {'score':>6}"
     print(header); print("-"*len(header))
-    for suite in ["math","reasoning","coding","general"]:
-        if suite in agg:
-            n = sum(1 for r in results if r["suite"] == suite)
-            print(f"{suite:<12} {n:>4}  {agg[suite]*100:5.1f}%")
+    for suite in sorted(k for k in agg if k != "overall"):
+        n = sum(1 for r in results if r["suite"] == suite)
+        print(f"{suite:<16} {n:>4}  {agg[suite]*100:5.1f}%")
     if "overall" in agg:
         print("-"*len(header))
         print(f"{'overall':<12} {len(results):>4}  {agg['overall']*100:5.1f}%")
     md = out_dir / "summary.md"
-    suite_keys = [s for s in ["math", "reasoning", "coding", "general"] if s in agg]
-    lines = [f"# {args.tag}", "", "| Model | " + " | ".join(s.capitalize() for s in suite_keys) + " | Avg |", "|---" + "|---"*len(suite_keys) + "|"]
+    suite_keys = [s for s in sorted(agg) if s != "overall"]
+    lines = [f"# {args.tag}", "", "| Model | " + " | ".join(suite_keys) + " | Avg |", "|---" + "|---"*len(suite_keys) + "|"]
     row = f"| {args.tag} | " + " | ".join(f"{agg[s]*100:.0f}" for s in suite_keys) + f" | {agg.get('overall',0)*100:.1f} |"
     lines.append(row)
     md.write_text("\n".join(lines), encoding="utf-8")

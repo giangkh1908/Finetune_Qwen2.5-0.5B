@@ -1,3 +1,7 @@
+# Train + harness deps. Trên máy GPU (driver 550/CUDA 12.4) đã cài
+# torch==2.6.0+cu124 + vllm==0.8.5 theo README §2 TRƯỚC, rồi mới chạy
+# `pip install -r requirements.txt` — pip sẽ thấy torch>=2.1 đã thỏa mãn
+# và không kéo bản cu12.9/cu13 về đè. KHÔNG `pip install -U vllm/torch`.
 transformers>=4.40
 torch>=2.1
 accelerate>=0.27
@@ -6,3 +10,4 @@ datasets>=2.18
 fastapi>=0.110
 uvicorn>=0.29
 bitsandbytes>=0.43
+requests>=2.31

@@ -1,8 +1,8 @@
-# Finetune Qwen2.5-Coder-0.5B — Lab Guide
+# Finetune Qwen2.5-Coder-0.5B — Text-to-Pandas Lab Guide
 
-Fine-tune **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** (494M, chuyên code) trên **80,000 text-to-pandas** (10k channudambal + 76k Rahima), đo **trước / sau** bằng benchmark pandas 6k + code 200, so sánh LoRA.
+Fine-tune **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** (494M) trên **~70.7k text-to-pandas** (WikiSQL-style: bảng + câu hỏi → `result = table[...]`), đo **trước / sau** bằng benchmark pandas **6,000 câu held-out** (exact match), so sánh LoRA.
 
-> Model mục tiêu: **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** — base `Qwen2ForCausalLM` + chat template `<|im_start|>`.
+> Model mục tiêu: **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** — base `Qwen2ForCausalLM` + chat template `<|im_start|>`, hợp domain vì output là code pandas.
 
 ---
 
@@ -10,97 +10,129 @@ Fine-tune **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** (494M, chuyên code) trên **80
 
 ```
 data/
-  train/coder_train_all_chunked.jsonl  # 6,425 code samples (đang dùng) — ≤4000 tok, no truncation
-    ├─ claude_opus_743 (production code, chunked tại block boundary)
-    ├─ curated knowledge 685 câu (OOP/Big-O/HTTP/SQL/trace, do tác giả soạn)
-    └─ Magicoder-OSS-Instruct-75K Python slice 5,000 câu (MIT, lọc trùng eval)
-  eval/                                # FROZEN — ĐỪNG SỬA (code-only)
-    coding.jsonl        84 items  unit_test (mỗi câu 4-5 assert, ~660 tests)
-    manifest.json       sha256 — chống sửa
+  train/pandas_train_80k.jsonl # 80,000 rows text-to-pandas (channudambal + Rahima, chưa dedup)
+  raw/                       # CSV nguồn (gitignored): channudambal 10k + Rahima 76k
+  eval/                      # FROZEN — ĐỪNG SỬA
+    pandas_eval_6k.jsonl     # 6,000 items, checker=exact (benchmark chính)
+    pandas_eval_1000.jsonl   # 1,000 items — quick loop (mẫu độc lập, KHÔNG phải prefix của 6k)
+    pandas_eval_500.jsonl    # 500 items — smoke test (mẫu độc lập)
+    manifest.json            # sha256 — chống sửa
 harness/
   run_eval.py       # generate + score (direct --model hoặc API --api, batch 40)
-  scorers.py        # numeric/exact/choice/constraint/unit_test
-  leak_check.py     # kiểm tra eval không leak từ train (6-gram Jaccard)
-  compare.py        # gộp nhiều run → bảng markdown
+  scorers.py        # exact (text-to-pandas), + numeric/choice/constraint/unit_test (legacy)
+  leak_check.py     # eval không memorize từ train (exact prompt + skeleton/answer)
+  compare.py        # gộp nhiều run → bảng markdown (cột suite động)
 serving/server.py   # FastAPI OpenAI-compatible (fallback khi không dùng vLLM)
 tools/
-  build_eval.py / build_eval_coding.py / build_eval_coding_extra.py  # builder eval
-  build_code_knowledge.py / build_magicoder.py / chunk_train.py       # builder train
-  shorten_and_augment.py                                              # pipeline train
+  convert_pandas_all.py      # builder: raw CSVs → train 80k + eval 6k + manifest
 train.py            # LoRA/QLoRA finetune (standard Trainer, completion-only masking)
 results/            # output benchmark (<tag>/result.json, summary.md, outputs.jsonl)
 outputs/            # adapter LoRA sau train (<tag>/adapter_config.json + safetensors ~17MB)
 requirements.txt
-HF model: giangkh19/qwen-0.5b-coder-r8  (adapter LoRA r=8)
 ```
 
 ---
 
-## 2. Chuẩn bị GPU (thuê) — template vLLM OpenAI CUDA 12.9
+## 2. Chuẩn bị GPU — 2 nhánh theo driver
 
-**Cấu hình chốt:**
+**Nhánh A — máy RTX 4070 driver 550 (CUDA 12.4 max):**
 
-* **Image:** `vLLM OpenAI CUDA 12.9 — 9.06 GB` (đã có `torch` + `vllm` + `nvcc` + `ninja`, không cài lại)
-* **GPU:** `RTX 3090 24GB` / CPU `Ryzen 5 5500 6C/12T` / RAM `48GB` / SSD `338GB`
-* **Model vLLM:** `Qwen/Qwen2.5-Coder-0.5B-Instruct`
-* **Tham số vLLM (args):** `--gpu-memory-utilization 0.8 --enable-prefix-caching --served-model-name qwen-coder`
-  * `0.8` ≈ 19.2 GB / 24 GB, chừa lại cho hệ thống
-  * `--enable-prefix-caching` tái dùng KV cache cho prefix giống nhau (system prompt dài / RAG)
-  * Không cần `--tensor-parallel-size`, `--kv-cache-dtype fp8`, `--quantization` ở bước baseline — 0.5B quá nhẹ
+| Thành phần | Giá trị | Lý do |
+|------------|---------|-------|
+| GPU | RTX 4070 16GB | máy hiện có |
+| Driver | 550.142 | `nvidia-smi` báo "CUDA Version: 12.4" = mức driver này hỗ trợ |
+| CUDA runtime | **12.4** | driver 550 chưa đạt chuẩn CUDA 12.8 (cần ≥570) / 12.9 (≥575) / 13.0 (≥580) |
+| Python | 3.10 | |
+| PyTorch | **2.6.0+cu124** | bản cuối có wheel cu124 |
+| vLLM | **0.8.5** | khớp torch 2.6.0+cu124 |
 
-Dòng lệnh tương đương:
+**Không lên vLLM 0.27/0.28 với driver 550:** wheel vLLM mới kéo torch 2.13 → CUDA 13 → `ncclCommResume`/driver fail trên 550. `cuda-compat` workaround chỉ áp dụng GPU datacenter, không áp dụng cho 4070 (consumer). Muốn vLLM mới thì nâng driver ≥580 — nhưng **không cần** cho Qwen2.5-Coder-0.5B: 0.8.5 serve đủ, model quá nhỏ để cần feature mới.
+
+### Nhánh B — máy thuê driver ≥ 580 (vd 3090, driver 590 / CUDA 13.1): dùng vLLM MỚI NHẤT
+
+Không cần pin gì cả:
+```bash
+vllm --version   # image đã bundle sẵn? → dùng luôn, KHÔNG pip install lại
+# nếu chưa có:
+pip3 install -U vllm   # torch cu13 tự kéo theo, driver 590 hỗ trợ native
+python3 -c "import torch; print(torch.__version__, torch.version.cuda, torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+```
+Serve giống hệt dưới, giữ nguyên args. `pip install -r requirements.txt` sau đó không được đè torch (`torch>=2.1` đã thỏa).
+
+**Không cần `nvcc`:** serving bằng torch/vLLM binary không cần CUDA Toolkit; chỉ JIT kernel (flashinfer build v.v.) mới cần, 0.8.5 không bắt.
+
+### Cài môi trường (làm đúng thứ tự)
+
+```bash
+rm -rf .venv
+python3.10 -m venv .venv && source .venv/bin/activate
+python -m pip install -U pip
+
+# 1) PyTorch cu124 TRƯỚC
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 \
+  --index-url https://download.pytorch.org/whl/cu124
+
+# 2) Verify torch OK rồi mới cài vLLM
+python3 -c "import torch; print(torch.__version__, torch.version.cuda, torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+# kỳ vọng: 2.6.0+cu124  12.4  True  NVIDIA GeForce RTX 4070
+
+pip install vllm==0.8.5
+python3 -c "import torch, vllm; print(torch.__version__, torch.version.cuda, vllm.__version__)"
+# kỳ vọng: 2.6.0+cu124  12.4  0.8.5
+```
+
+> Nếu `pip install vllm==0.8.5` kéo torch bản khác về đè: cài thêm `--extra-index-url https://download.pytorch.org/whl/cu124` và kiểm tra lại `torch.__version__` phải còn `+cu124`.
+
+### Serve
+
 ```bash
 vllm serve Qwen/Qwen2.5-Coder-0.5B-Instruct \
   --host 0.0.0.0 --port 8000 \
   --served-model-name qwen-coder \
-  --gpu-memory-utilization 0.8 --enable-prefix-caching
+  --gpu-memory-utilization 0.8 --max-model-len 8192 --enable-prefix-caching
 ```
+* `0.8` ≈ 12.8 GB / 16 GB — model 0.5B (~1GB bf16) nên phần lớn là KV cache, rất dư
+* `--max-model-len 8192` đủ cho prompt pandas (~350 tok) + headroom
+* Không cần tensor-parallel / quantization
 
-### Boot check (đừng cài gì, chạy đúng 4 lệnh)
-
-```bash
-nvidia-smi
-df -h
-vllm --version
-python3 -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0))"
-```
-Gửi 4 output — nếu template đúng thì đi thẳng serve → test API → benchmark, không quay lại vòng `torch`/`nvcc`.
-
-### Clone repo (sau khi boot check OK)
+### Clone repo (sau khi serve OK)
 
 ```bash
 cd ~
 git clone https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B.git
 cd Finetune_Qwen2.5-0.5B
-pip3 install -r requirements.txt -q  # chỉ harness/tools, KHÔNG cài lại torch/vllm
-python3 harness/leak_check.py          # PASS
+pip3 install -r requirements.txt -q  # harness/tools; torch+vllm đã cài ở trên, KHÔNG pip install lại vllm
+python3 harness/leak_check.py          # xem ghi chú overlap §8 (báo FAIL có chủ đích với split hiện tại)
 ```
+
+> Train (`§4`) cần thêm `peft transformers datasets accelerate bitsandbytes` — đã nằm trong `requirements.txt`. Nếu train chung venv với vLLM 0.8.5 bị xung đột phiên bản, tạo venv thứ hai cho train (train chỉ cần torch cu124 + HF stack, không cần vLLM).
 
 ---
 
-## 3. Baseline BEFORE (code-only, 84 câu) — qua vLLM
+## 3. Baseline BEFORE (6k pandas, exact match) — qua vLLM
 
 ```bash
-# Hệ thống đã tự serve vLLM trên :8000 với model/args ở trên. Test:
+# Sau khi `vllm serve` ở §2 đã chạy trên :8000. Test:
 curl http://localhost:8000/v1/models
 curl http://localhost:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -d '{"model":"qwen-coder","messages":[{"role":"user","content":"Write a Python function to sort a list."}],"max_tokens":256,"temperature":0.2}'
+  -d '{"model":"qwen-coder","messages":[{"role":"user","content":"Table Name: t (a (int64), b (object))\nWhat is b when a is 3?"}],"max_tokens":64,"temperature":0}'
 
-# Benchmark (batch 40 = 40 request concurrent, vLLM continuous batching)
-python3 harness/run_eval.py --api http://localhost:8000/v1 --tag coder_base --batch-size 40
-# hoặc chỉ định model name nếu khác served-model-name:
-# python3 harness/run_eval.py --api http://localhost:8000/v1 --model qwen-coder --tag coder_base --batch-size 40
+# Smoke test trước (500 câu, ~1 phút):
+python3 harness/run_eval.py --api http://localhost:8000/v1 --api-model qwen-coder --tag pandas_base_smoke --suites pandas_eval_500.jsonl --batch-size 40
+
+# Benchmark chính (6,000 câu, batch 40 = 40 request concurrent)
+python3 harness/run_eval.py --api http://localhost:8000/v1 --api-model qwen-coder --tag pandas_base --batch-size 40
 ```
 
-Kết quả: `results/coder_base/result.json` — **73.9%** (84 code).
+Kết quả: `results/pandas_base/result.json` + `summary.md`.
 
-> Fallback không vLLM (nếu muốn chạy direct): `python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag coder_base` hoặc `python3 serving/server.py` (transformers, không cần vLLM).
+> Fallback không vLLM (direct): `python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag pandas_base` (chậm hơn nhiều — không continuous batching) hoặc `python3 serving/server.py` (transformers, serialize generation).
 
 Transfer về Windows:
 ```powershell
-mkdir D:\Finetune\results\coder_base 2>$null
-scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_base/result.json D:\Finetune\results\coder_base\result.json
+mkdir D:\Finetune\results\pandas_base 2>$null
+scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/pandas_base/result.json D:\Finetune\results\pandas_base\result.json
 ```
 
 ---
@@ -109,39 +141,62 @@ scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_base/res
 
 | Tham số | Ý nghĩa | Khuyến nghị |
 |---------|---------|-------------|
-| `--r` | LoRA rank. Cao = học mạnh, dễ overfit | **8** điểm ngọt cho 6425 rows; 32 chỉ khi data lớn hơn |
+| `--r` | LoRA rank. Cao = học mạnh, dễ overfit | **8** điểm ngọt cho 80k rows |
 | `--alpha` | scaling (thường 2×r) | 16 (r=8) |
-| `--max-seq-length` | Giới hạn token/sample. **Nguồn VRAM chính** | 4096 (đã chunk ≤4000 nên **không truncate**, 24GB thoải mái) |
-| `--epochs` | Số vòng qua dataset | **1** (6425 rows đa dạng, không cần lặp) |
-| `--batch-size` / `--grad-accum` | Batch thực/effective | 1 / 8 |
+| `--max-seq-length` | Giới hạn token/sample. **Nguồn VRAM chính** | **512** (pandas samples max ~350 tok → **không truncate**) |
+| `--epochs` | Số vòng qua dataset | **1** (80k rows, không cần lặp) |
+| `--batch-size` / `--grad-accum` | Batch thực/effective | 2 / 8 (seq ngắn, nhét được 2) |
 | `--lr` | Tốc độ học | 2e-4 |
-| `--qlora` | Nén 4-bit → giảm 40–60% VRAM | Thêm khi chạm trần |
+| `--qlora` | Nén 4-bit → giảm 40–60% VRAM | Không cần ở 0.5B + seq 512 |
 
 ```bash
 # LoRA r=8 — chính
-python3 train.py --r 8 --max-seq-length 4096 --epochs 1 --tag coder_r8
+python3 train.py --r 8 --epochs 1 --tag pandas_r8
 
-# QLoRA 4-bit r=8 (nếu muốn)
-python3 train.py --r 8 --qlora --max-seq-length 4096 --epochs 1 --tag coder_qlora
+# Smoke 200 bước trước khi commit cả epoch (optional): thêm --epochs 1 rồi kill sau ~200 step, hoặc test nhanh bằng:
+python3 train.py --r 8 --epochs 1 --tag pandas_r8_smoke --max-seq-length 512
 
-# Thử r=32 (mạnh hơn, dễ overfit)
-python3 train.py --r 32 --alpha 64 --max-seq-length 4096 --epochs 1 --tag coder_r32
+# Thử r=32 (mạnh hơn, dễ overfit pattern có sẵn)
+python3 train.py --r 32 --alpha 64 --epochs 1 --tag pandas_r32
 ```
 
-Output: `outputs/<tag>/` — adapter ~17MB (r=8) / ~70MB (r=32). Log `train_loss` giảm dần là đang học; `grad_norm` 0.2–0.5 là ổn.
+Output: `outputs/<tag>/` — adapter ~17MB (r=8) / ~70MB (r=32). Log `train_loss` giảm nhanh trong vài trăm step đầu là đang học; `grad_norm` 0.2–1.0 là ổn.
 
-> Train đã bật `gradient_checkpointing` + `enable_input_require_grads()` — fix OOM khi `seq 4096`.
+> Train đã bật `gradient_checkpointing` + `enable_input_require_grads()`.
+> 80k rows × seq 512 trên 4070 16GB: ước **1.5–3 giờ** cho 1 epoch (batch 2). Không phải 20 phút như 6.4k rows code cũ — tính trước thời gian nếu thuê GPU theo giờ.
 
 ---
 
 ## 5. Benchmark AFTER
 
-```bash
-python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --adapter outputs/coder_r8 --tag coder_r8
+Adapter LoRA phải **merge trước khi serve qua vLLM** (vLLM API mode không nhận `--adapter`):
 
-# Windows:
-mkdir D:\Finetune\results\coder_r8 2>$null
-scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_r8/result.json D:\Finetune\results\coder_r8\result.json
+```bash
+# 1) Merge adapter vào base → saved model
+python3 -c "
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
+base='Qwen/Qwen2.5-Coder-0.5B-Instruct'
+m=PeftModel.from_pretrained(AutoModelForCausalLM.from_pretrained(base, torch_dtype='auto'), 'outputs/pandas_r8').merge_and_unload()
+m.save_pretrained('merged_pandas_r8'); AutoTokenizer.from_pretrained(base).save_pretrained('merged_pandas_r8')"
+
+# 2) Serve model đã merge
+vllm serve merged_pandas_r8 --host 0.0.0.0 --port 8000 --served-model-name qwen-coder \
+  --gpu-memory-utilization 0.8 --max-model-len 8192 --enable-prefix-caching
+
+# 3) Benchmark
+python3 harness/run_eval.py --api http://localhost:8000/v1 --api-model qwen-coder --tag pandas_r8 --batch-size 40
+```
+
+Hoặc chạy direct không vLLM (không cần merge, PEFT tự load):
+```bash
+python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --adapter outputs/pandas_r8 --tag pandas_r8
+```
+
+Windows:
+```powershell
+mkdir D:\Finetune\results\pandas_r8 2>$null
+scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/pandas_r8/result.json D:\Finetune\results\pandas_r8\result.json
 ```
 
 ---
@@ -149,10 +204,11 @@ scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_r8/resul
 ## 6. So sánh
 
 ```bash
-python3 harness/compare.py coder_base coder_r8
-# | Model | Coding | Avg |
-# | coder_base | 74 | 73.9 |
-# | coder_r8   | 80 | 80.5 |
+python3 harness/compare.py pandas_base pandas_r8
+# | Model | pandas_eval_6k | Avg |
+# |---|---|---|
+# | pandas_base | .. | .. |
+# | pandas_r8   | .. | .. |
 ```
 
 ---
@@ -161,55 +217,76 @@ python3 harness/compare.py coder_base coder_r8
 
 | Model | Data | Eval | Kết quả | Δ vs base |
 |-------|------|------|---------|-----------|
-| Qwen-Coder 0.5B base | — | 84 code | **73.9%** | — |
-| **+ LoRA r=8** | 6,425 code (743 prod chunked + 685 curated + 5,000 Magicoder Python) | 84 code | **80.5%** | **+6.6 pts** |
+| Qwen-Coder 0.5B base | — | 6k pandas | *(chưa chạy — điền sau §3)* | — |
+| **+ LoRA r=8** | 80k pandas (lưu ý overlap §8) | 6k pandas | *(chưa chạy — điền sau §5)* | — |
 
-**Chẩn đoán:** Không còn catastrophic forgetting như lần finetune đầu (trước: 60.8% → 43.5%, math −36, coding −23). Đổi sang **code-only + Coder model + dataset đa dạng + chunk không truncate + 1 epoch** đã đảo chiều.
+> Kinh nghiệm từ thí nghiệm code cũ (đã archive trong git history): catastrophic forgetting xảy ra khi data lệch domain + truncate 40% sample; sửa bằng data đúng domain, chunk/không truncate, 1 epoch. Ở pandas: seq 512 phủ 100% samples (max ~350 tok) nên không có rủi ro truncate.
 
-**Nguyên nhân thành công:** dataset đa dạng (prod + knowledge + Magicoder), chunk ≤4000 thay vì truncate 40%, epochs 1 chống overfit, Coder model hợp domain.
+**Lưu ý scoring:** `checker=exact` so answer `result = table...` với response (normalize thường + substring word-boundary). Model trả lời dài dòng nhưng chứa đúng query vẫn được tính đúng — đó là chủ ý (tolerate format), nhưng cũng nghĩa là điểm hơi dễ dãi nếu model "đoán" query ngắn.
 
 ---
 
-## 8. Dataset (đang dùng)
+## 8. Dataset
 
-`data/train/coder_train_all_chunked.jsonl` — **6,425 rows**, ≤4000 tok, **0 sample vượt ngưỡng** (không truncate):
+**Train:** `data/train/pandas_train_80k.jsonl` — **80,000 rows**, format `{"messages":[user, assistant]}`. Gộp 2 nguồn, chưa dedup.
 
-| Nguồn | Rows | Mô tả |
-|-------|------|-------|
-| Claude production code (chunked) | 743 → chunked 1,336 | Queue/file-watcher/migration helper — chia tại block boundary |
-| Curated knowledge (tác giả soạn) | 685 | OOP/Big-O/HTTP/SQL/trace, ngắn (<70 tok) |
-| Magicoder-OSS-Instruct-75K Python | 5,000 | Python thực tế (uploader, config, API...), MIT, lọc trùng eval (0 collision) |
+**Eval:** `data/eval/pandas_eval_6k.jsonl` — **6,000 items** `{id, prompt, answer, checker:"exact", ...}`, FROZEN theo `manifest.json` (sha256 content-hash, line-ending agnostic; `run_eval.py` tự verify mỗi lần chạy). `pandas_eval_1000/500.jsonl` là **mẫu nhanh độc lập** (id trùng nhưng nội dung không phải prefix của 6k) — dùng cho vòng lặp debug, **không dùng làm benchmark chính**.
 
-Build lại:
+Nguồn (gộp 2 dataset, `data/raw/`):
+
+| Nguồn | Rows raw | Mô tả |
+|-------|----------|-------|
+| channudambal text-to-pandas | ~9.9k | phức tạp hơn (median ~329 chars) |
+| Rahima train + test | ~76.7k | ngắn (median ~205 chars) |
+
+`tools/convert_pandas_all.py` (seed 20261101): shuffle toàn bộ 86.7k rows → `rows[:80000]` train, `rows[80000:86000]` eval. **Split theo dòng, không theo prompt.**
+
+### ⚠️ Overlap đã biết giữa train 80k và eval 6k
+
+Vì raw 2 nguồn trùng nhau nhiều, split-theo-dóng để lọt:
+
+| Chỉ số | Giá trị |
+|--------|---------|
+| Eval prompt xuất hiện nguyên văn trong train | **699 / 6,000 (11.7%)** |
+| Trong đó (prompt, answer) trùng nguyên cặp (memorization) | **606** |
+| Eval items có ≥2 phiên bản answer khác nhau trong chính train (prompt conflict) | ~307 prompt overlap, một phần do answer mâu thuẫn giữa 2 nguồn |
+| Trùng nội bộ train: 80,000 rows chỉ ~73.8k unique pairs | ~6,157 dòng trùng |
+
+Hệ quả: điểm AFTER trên ~12% eval items là **điểm nhớ lại**, báo cáo cao hơn thực lực tổng quát hóa. `harness/leak_check.py` vì vậy báo **FAIL (872 exact matches tính cả 500/1000 subsets)** — đó là chẩn đoán đúng, không phải bug tool.
+
+2 hướng xử lý (chọn 1, chưa làm):
+1. **Giữ nguyên, chấp nhận caveat** — so sánh base vs r8 trên cùng 6k vẫn công bằng tương đối (cùng benefit), chỉ tuyệt đối hóa cao. Ghi chú vào mọi báo cáo.
+2. **Rebuild leak-free** — dedup (prompt,answer), drop ~491 prompt conflict, split theo prompt: ~70.7k train + 6k eval prompt-disjoint, leak_check PASS. (Đã proof-of-concept; cần regenerate + chạy lại baseline — chưa commit vì dataset hiện tại là của bạn, đang giữ nguyên.)
+
+Build lại như hiện tại (deterministic, seed 20261101):
 ```bash
-python3 tools/build_magicoder.py  # tạo 5000 Python slice
-python3 tools/chunk_train.py --input data/train/coder_train_all.jsonl --output data/train/coder_train_all_chunked.jsonl --max-tokens 4000
+python3 tools/convert_pandas_all.py
+python3 harness/leak_check.py   # FAIL = overlap 699 prompts, xem bảng trên
 ```
-
-Eval: `data/eval/coding.jsonl` — 84 hàm Python (24 gốc + 60 mở rộng thuật toán: string/list/dict/math/parsing), mỗi câu 4–5 assert, reference 100% pass qua `scorers`, **leak PASS** (Jaccard 0.009).
 
 ---
 
 ## 9. Push model lên Hugging Face
 
-Adapter **giangkh19/qwen-0.5b-coder-r8** (HF namespace là `giangkh19`, không phải `giangkh1908`):
+Tạo repo mới **`giangkh19/qwen-0.5b-pandas-r8`** (HF namespace là `giangkh19`, không phải `giangkh1908`):
 
 ```powershell
 # Windows — tạo Classic Write token tại https://huggingface.co/settings/tokens
 hf auth logout
 hf auth login   # chọn Paste, dán Classic Write token
 
-hf upload giangkh19/qwen-0.5b-coder-r8 outputs/coder_r8 --repo-type model
-# README trong outputs/coder_r8/README.md đã ghi sẵn dataset + metrics
+hf repo-create giangkh19/qwen-0.5b-pandas-r8 --repo-type model 2>$null  # repo đã có thì bỏ lệnh này
+hf upload giangkh19/qwen-0.5b-pandas-r8 outputs/pandas_r8 --repo-type model
 ```
 
 Dùng lại:
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from peft import PeftModel
 base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-Coder-0.5B-Instruct", trust_remote_code=True)
-model = PeftModel.from_pretrained(base, "giangkh19/qwen-0.5b-coder-r8")
+model = PeftModel.from_pretrained(base, "giangkh19/qwen-0.5b-pandas-r8")
 ```
+
+Adapter code cũ `giangkh19/qwen-0.5b-coder-r8` vẫn còn trên HF (thí nghiệm trước, không liên quan pipeline pandas này).
 
 ---
 
@@ -217,12 +294,15 @@ model = PeftModel.from_pretrained(base, "giangkh19/qwen-0.5b-coder-r8")
 
 | Vấn đề | Giải pháp |
 |--------|-----------|
-| Template vLLM báo `model not found` | Điền ô **Model vLLM**: `Qwen/Qwen2.5-Coder-0.5B-Instruct`, Args như §2 |
-| Muốn đổi 80% VRAM / cache | Sửa ô **Tham số vLLM**: `--gpu-memory-utilization 0.8 --enable-prefix-caching --served-model-name qwen-coder` rồi restart instance |
-| `No space left` / `triton 197MB` | Template 12.9 đã có sẵn, **đừng** `pip install vllm` lại; chỉ `pip install -r requirements.txt` |
-| `libtorch_cuda.so: ncclCommResume` | Sai `torch` — template 12.9 đã đúng, đừng `pip install torch` đè lên; nếu tự cài bare Ubuntu thì dùng `cu124` khớp driver |
+| vLLM startup fail `ncclCommResume` / undefined symbol | torch bị kéo bản cu12.9/cu13 (mặc định PyPI) trong khi driver chỉ 550 — cài lại đúng §2: torch `2.6.0+cu124` + `vllm==0.8.5`. Đừng `pip install -U vllm` |
+| `pip install vllm` kéo torch mới đè cu124 | Dùng `pip install vllm==0.8.5 --extra-index-url https://download.pytorch.org/whl/cu124`, kiểm tra `torch.__version__` còn `+cu124` |
+| Muốn dùng vLLM 0.27/0.28 mới | Bắt buộc nâng driver ≥580 (CUDA 13) — provider cho đổi image thì đổi, không có workaround cho 4070 |
+| `ERROR: manifest mismatch` | `data/eval/` đã bị sửa sau freeze — `git checkout data/eval/` khôi phục, đừng tự vá hash |
+| `No space left` | torch cu124 + vllm ~8GB; dọn `~/.cache/pip` hoặc clone model bằng `HF_HOME` chỉ định ổ còn trống |
 | `python: command not found` | `python3` |
-| VRAM OOM khi train | 24GB dư dả với 0.5B; nếu OOM check `nvidia-smi` process cũ, `kill -9 <PID>` |
+| VRAM OOM khi train | 0.5B + seq 512 cần <10GB; nếu OOM check `nvidia-smi` process cũ, `kill -9 <PID>` |
+| `run_eval` API mode chậm | Tăng `--batch-size` (vLLM continuous batching chịu được 64–128 với 0.5B) |
+| Kết quả `--api` bị 401/404 | Đúng path phải là `.../v1`; `--api-model` phải khớp `--served-model-name` |
 | `git pull` báo file đè | `rm -rf results/<tag>` rồi `git pull` |
 | scp hỏi password | Chạy riêng trong PowerShell/CMD, nhập thủ công |
 | `403 Forbidden` khi push HF | Token phải **Classic Write** (không phải read), `hf auth whoami` phải ra `giangkh19` |
@@ -231,6 +311,7 @@ model = PeftModel.from_pretrained(base, "giangkh19/qwen-0.5b-coder-r8")
 
 ## 11. Bước tiếp theo
 
-1. Thử `coder_r32` / `coder_qlora` so với `coder_r8`.
-2. Thêm data lớn hơn (pull thêm Magicoder, giữ `max-seq-length 4000` + 1 epoch).
-3. Serve: `python serving/server.py --model giangkh19/qwen-0.5b-coder-r8` (merge adapter trước nếu cần).
+1. Chạy §3 → §6 với data pandas mới, điền kết quả vào §7.
+2. So `pandas_r8` vs `pandas_r32` (pattern hẹp hơn code — r nhỏ có thể đã đủ).
+3. Cân nhắc scorer nghiêm ngặt hơn: `unit_test`-style execute query trên dataframe dựng từ schema trong prompt (exact-match hiện tại tolerate format).
+4. Serve: merge adapter (§5 bước 1) rồi `vllm serve merged_pandas_r8`, hoặc `MODEL=merged_pandas_r8 python serving/server.py`.

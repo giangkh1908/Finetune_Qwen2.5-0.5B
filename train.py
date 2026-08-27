@@ -1,15 +1,15 @@
-"""Fine-tune Qwen2.5-Coder-0.5B-Instruct on the Claude coding dataset.
+"""Fine-tune Qwen2.5-Coder-0.5B-Instruct on the text-to-pandas dataset.
 
 Usage (on GPU, 24GB):
-    # LoRA r=8 (code-only)
-    python train.py --r 8 --max-seq-length 4096 --epochs 1 --tag coder_r8
+    # LoRA r=8 (text-to-pandas)
+    python train.py --r 8 --epochs 1 --tag pandas_r8
     # QLoRA 4-bit (needs bitsandbytes)
-    python train.py --r 32 --qlora --max-seq-length 4096 --tag coder_qlora
+    python train.py --r 8 --qlora --epochs 1 --tag pandas_qlora
 
 Outputs adapter -> outputs/<tag>/ (peft adapter_config.json + weights).
 Benchmark with:
     python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct \
-        --adapter outputs/<tag> --tag <tag> --suites coding.jsonl
+        --adapter outputs/<tag> --tag <tag>
 """
 import argparse
 import json
@@ -59,14 +59,15 @@ def tokenize_example(example, tokenizer, max_seq_length):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--tag", default="coder_r8")
+    ap.add_argument("--tag", default="pandas_r8")
     ap.add_argument("--model", default=MODEL_ID, help="HF model id or local path")
     ap.add_argument("--data", default=str(DATA), help="path to train jsonl")
     ap.add_argument("--r", type=int, default=8)
     ap.add_argument("--alpha", type=int, default=16)
     ap.add_argument("--lr", type=float, default=2e-4)
     ap.add_argument("--epochs", type=int, default=1)
-    ap.add_argument("--max-seq-length", type=int, default=4096)
+    ap.add_argument("--max-seq-length", type=int, default=512,
+                    help="pandas samples are max ~350 tokens; 512 = zero truncation")
     ap.add_argument("--batch-size", type=int, default=1)
     ap.add_argument("--grad-accum", type=int, default=8)
     ap.add_argument("--qlora", action="store_true")

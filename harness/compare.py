@@ -13,28 +13,28 @@ def load_result(tag):
 
 def main():
     ap = argparse.ArgumentParser(description="Compare benchmark runs")
-    ap.add_argument("tags", nargs="+", help="result tags, e.g. base_before lora_r8 lora_r32")
+    ap.add_argument("tags", nargs="+", help="result tags, e.g. pandas_base pandas_r8")
     ap.add_argument("--out", default=None, help="output markdown path")
     args = ap.parse_args()
 
+    # union of suite keys across runs (result.json "aggregate", minus "overall")
     rows = []
+    suites = []
     for tag in args.tags:
         r = load_result(tag)
         agg = r.get("aggregate", {})
-        rows.append({
-            "tag": tag,
-            "math": agg.get("math", 0)*100,
-            "coding": agg.get("coding", 0)*100,
-            "reasoning": agg.get("reasoning", 0)*100,
-            "general": agg.get("general", 0)*100,
-            "overall": agg.get("overall", 0)*100,
-        })
+        for k in agg:
+            if k != "overall" and k not in suites:
+                suites.append(k)
+        rows.append((tag, agg))
+    suites.sort()
 
-    header = "| Model | Math | Coding | Reasoning | General | Avg |"
-    sep = "|---|---|---|---|---|---|"
+    header = "| Model | " + " | ".join(suites) + " | Avg |"
+    sep = "|---" * (len(suites) + 2) + "|"
     lines = [header, sep]
-    for row in rows:
-        lines.append(f"| {row['tag']} | {row['math']:.0f} | {row['coding']:.0f} | {row['reasoning']:.0f} | {row['general']:.0f} | {row['overall']:.1f} |")
+    for tag, agg in rows:
+        cells = " | ".join(f"{agg.get(s, 0)*100:.0f}" for s in suites)
+        lines.append(f"| {tag} | {cells} | {agg.get('overall', 0)*100:.1f} |")
     out = "\n".join(lines)
     print(out)
     if args.out:
