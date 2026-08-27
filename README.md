@@ -1,6 +1,6 @@
 # Finetune Qwen2.5-Coder-0.5B — Lab Guide
 
-Fine-tune **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** (494M, chuyên code) trên **6,425 samples code**, đo **trước / sau** bằng benchmark code-only 84 câu (unit-test), so sánh LoRA.
+Fine-tune **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** (494M, chuyên code) trên **80,000 text-to-pandas** (10k channudambal + 76k Rahima), đo **trước / sau** bằng benchmark pandas 6k + code 200, so sánh LoRA.
 
 > Model mục tiêu: **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** — base `Qwen2ForCausalLM` + chat template `<|im_start|>`.
 
@@ -45,19 +45,22 @@ cd ~
 git clone https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B.git
 cd Finetune_Qwen2.5-0.5B
 
-# Ubuntu 22.04 đã có Python 3.10; nếu 20.04 thì dùng conda:
-# curl -fsSL https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -o miniforge.sh
-# bash miniforge.sh -b -p ~/miniforge && source ~/miniforge/etc/profile.d/conda.sh && conda create -y -n llm python=3.10 && conda activate llm
+# Ubuntu 22.04 chưa có pip → cài trước
+apt update && apt install -y python3 python3-pip python3-venv git -q
+python3 --version  # phải ra 3.10.x
+pip3 --version     # hoặc python3 -m pip --version
 
-pip install -r requirements.txt
-pip install bitsandbytes huggingface_hub -q  # nếu muốn QLoRA / push HF
+# Cài deps (dùng pip3 hoặc python3 -m pip)
+pip3 install -r requirements.txt
+pip3 install bitsandbytes huggingface_hub -q  # nếu muốn QLoRA / push HF
 ```
 
 Verify:
 ```bash
-python harness/leak_check.py          # PASS — train 6425 vs eval 84 (max Jaccard 0.009)
-ls data/train/coder_train_all_chunked.jsonl  # 6425
-python -c "import json; print(len([json.loads(l) for l in open('data/eval/coding.jsonl')]))"  # 84
+python harness/leak_check.py          # PASS
+ls data/train/pandas_train_80k.jsonl  # 80000
+python -c "import json; print(len([json.loads(l) for l in open('data/eval/pandas_eval_6k.jsonl')]))"  # 6000
+python -c "import json; print(len([json.loads(l) for l in open('data/eval/coding.jsonl')]))"  # 200
 ```
 
 ---
