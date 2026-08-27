@@ -303,15 +303,23 @@ python3 harness/leak_check.py   # FAIL = overlap 699 prompts, xem bảng trên
 
 ## 9. Push model lên Hugging Face
 
-Tạo repo mới **`giangkh19/qwen-0.5b-pandas-r8`** (HF namespace là `giangkh19`, không phải `giangkh1908`):
+Hai repo — **đã upload 27/8/2026** (HF namespace là `giangkh19`, không phải `giangkh1908`; `hf upload` tự tạo repo):
+
+| Repo | Nội dung | Size |
+|------|----------|------|
+| `giangkh19/qwen-0.5b-pandas-r8` | **Adapter LoRA** (dùng với PEFT, nguồn chân lý) | ~70MB (gồm checkpoint train — có thể xóa `checkpoint-5000/` cho gọn) |
+| `giangkh19/qwen-0.5b-pandas-merged` | Model đã merge, dùng ngay không cần PEFT | ~716MB |
+
+```bash
+# Trên GPU (hoặc bất kỳ máy nào đã hf auth login):
+hf upload giangkh19/qwen-0.5b-pandas-r8 outputs/pandas_r8 --repo-type model
+hf upload giangkh19/qwen-0.5b-pandas-merged merged_pandas_r8 --repo-type model
+```
 
 ```powershell
-# Windows — tạo Classic Write token tại https://huggingface.co/settings/tokens
-hf auth logout
-hf auth login   # chọn Paste, dán Classic Write token
-
-hf repo-create giangkh19/qwen-0.5b-pandas-r8 --repo-type model 2>$null  # repo đã có thì bỏ lệnh này
-hf upload giangkh19/qwen-0.5b-pandas-r8 outputs/pandas_r8 --repo-type model
+# Tải về Windows (resume sẵn, đứt thì chạy lại):
+hf download giangkh19/qwen-0.5b-pandas-r8 --local-dir pandas_r8_adapter
+hf download giangkh19/qwen-0.5b-pandas-merged --local-dir merged_pandas_r8
 ```
 
 Dùng lại:
