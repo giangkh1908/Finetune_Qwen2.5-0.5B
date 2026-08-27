@@ -112,7 +112,33 @@ pip3 install -r requirements.txt -q  # harness/tools; torch+vllm đã cài ở t
 python3 harness/leak_check.py          # xem ghi chú overlap §8 (báo FAIL có chủ đích với split hiện tại)
 ```
 
-> Train (`§4`) cần thêm `peft transformers datasets accelerate bitsandbytes` — đã nằm trong `requirements.txt`. Nếu train chung venv với vLLM 0.8.5 bị xung đột phiên bản, tạo venv thứ hai cho train (train chỉ cần torch cu124 + HF stack, không cần vLLM).
+> Train (`§4`) dùng chung venv với vLLM được (chỉ cần torch + HF stack, vLLM không liên quan lúc train). Nếu xung đột phiên bản, tạo venv thứ hai cho train.
+
+### Runbook đã chạy thật (3090 / driver 590 / vLLM 0.28, 27/8/2026)
+
+```bash
+# 0) Boot check: nvidia-smi (driver/CUDA), df -h, vllm --version, torch cuda available
+# 1) Pull + deps
+git clone https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B.git && cd Finetune_Qwen2.5-0.5B
+pip3 install -r requirements.txt -q
+python3 harness/leak_check.py                 # FAIL 872 = đúng thiết kế (§8), bỏ qua
+# 2) Serve base
+export VLLM_USE_FLASHINFER_SAMPLER=0          # BẮT BUỘC — image không có nvcc (§10)
+vllm serve Qwen/Qwen2.5-Coder-0.5B-Instruct --host 0.0.0.0 --port 8000 \
+  --served-model-name qwen-coder \
+  --gpu-memory-utilization 0.8 --max-model-len 8192 --enable-prefix-caching &
+curl http://localhost:8000/v1/models          # PHẢI thấy "qwen-coder" — thiếu flag = 404 (§10)
+# 3) Baseline BEFORE (smoke 500 trước, rồi full 6k — resume được theo tag)
+python3 harness/run_eval.py --api http://localhost:8000/v1 --api-model qwen-coder --tag pandas_base_smoke --suites pandas_eval_500.jsonl --batch-size 40
+python3 harness/run_eval.py --api http://localhost:8000/v1 --api-model qwen-coder --tag pandas_base --batch-size 40
+# 4) Train (tắt serve để trả VRAM)
+pkill -f "vllm serve"; sleep 3
+python3 train.py --r 8 --epochs 1 --tag pandas_r8 --batch-size 2
+# 5) Merge + serve + AFTER  (xem §5)
+# 6) compare.py pandas_base pandas_r8 — CHẠY TRÊN GPU TRƯỚC KHI HỦY INSTANCE, rồi scp results/
+```
+
+**Timeline thực tế:** setup stack ~10 phút · serve + warmup ~2 phút · baseline 6k ~15 phút · train 5000 steps ~2h10m · merge ~1 phút · after 6k ~15 phút. Tổng ~3 giờ một ca.
 
 ---
 
@@ -133,6 +159,8 @@ python3 harness/run_eval.py --api http://localhost:8000/v1 --api-model qwen-code
 ```
 
 Kết quả: `results/pandas_base/result.json` + `summary.md`.
+
+> **Kỳ vọng baseline ≈ 0%** (đã chạy thật 27/8/2026: 0.0/100 trên cả 6k): base model không biết nhiệm vụ là sinh pandas query — 46% trả SQL (`SELECT ...`), 53% trả câu chữ miêu tả → exact-match không khớp câu nào. **0% là điểm khởi đầu hợp lệ, không phải lỗi harness** — toàn bộ cải thiện sẽ đến từ finetune học format `result = table[...]`.
 
 > Fallback không vLLM (direct): `python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag pandas_base` (chậm hơn nhiều — không continuous batching) hoặc `python3 serving/server.py` (transformers, serialize generation).
 
@@ -158,19 +186,18 @@ scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/pandas_base/re
 
 ```bash
 # LoRA r=8 — chính
-python3 train.py --r 8 --epochs 1 --tag pandas_r8
-
-# Smoke 200 bước trước khi commit cả epoch (optional): thêm --epochs 1 rồi kill sau ~200 step, hoặc test nhanh bằng:
-python3 train.py --r 8 --epochs 1 --tag pandas_r8_smoke --max-seq-length 512
+# LoRA r=8 — chính (đã chạy thật trên 3090: loss 3.61 → 1.26 chỉ trong 25 step đầu, VRAM 4.4GB, ~2h10m)
+python3 train.py --r 8 --epochs 1 --tag pandas_r8 --batch-size 2
 
 # Thử r=32 (mạnh hơn, dễ overfit pattern có sẵn)
-python3 train.py --r 32 --alpha 64 --epochs 1 --tag pandas_r32
+python3 train.py --r 32 --alpha 64 --epochs 1 --tag pandas_r32 --batch-size 2
+
 ```
 
-Output: `outputs/<tag>/` — adapter ~17MB (r=8) / ~70MB (r=32). Log `train_loss` giảm nhanh trong vài trăm step đầu là đang học; `grad_norm` 0.2–1.0 là ổn.
+Output: `outputs/<tag>/` — adapter ~17MB (r=8) / ~70MB (r=32). Log kỳ vọng trên 3090 (đã chạy thật): `loss 3.61 → 2.30 → 1.89 → 1.56 → 1.26` trong 25 step đầu, `grad_norm` 4 → 1.8 và hạ dần — giảm đều là đang học; chỉ lo nếu grad_norm bật lại >5 hoặc loss đi ngang từ step ~500.
 
-> Train đã bật `gradient_checkpointing` + `enable_input_require_grads()`.
-> 80k rows × seq 512 trên 4070 16GB: ước **1.5–3 giờ** cho 1 epoch (batch 2). Không phải 20 phút như 6.4k rows code cũ — tính trước thời gian nếu thuê GPU theo giờ.
+> Train đã bật `gradient_checkpointing` + `enable_input_require_grads()`. VRAM dùng thực tế 4.4GB/24GB (seq 512, batch 2) — còn headroom lớn nếu muốn `--batch-size 4`.
+> 80k rows × seq 512 trên 3090: **~2h10m** cho 1 epoch (5000 steps, 1.57 s/it).
 
 ---
 
