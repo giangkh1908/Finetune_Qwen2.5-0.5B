@@ -38,7 +38,7 @@ HF model: giangkh19/qwen-0.5b-coder-r8  (adapter LoRA r=8)
 
 ## 2. Chuẩn bị GPU (thuê)
 
-Yêu cầu: **RTX 3090 24GB** (8GB cũng chạy được nhưng chật). Ví dụ: `ssh -p 1757 root@n3.ckey.vn`
+Yêu cầu: **RTX 3090 24GB** (8GB cũng chạy được nhưng chật). Ví dụ: `ssh -p 1757 root@172.00.00`
 
 ```bash
 cd ~
@@ -80,7 +80,7 @@ Kết quả: `results/coder_base/result.json` — **73.9%** (84 code).
 Transfer về Windows:
 ```powershell
 mkdir D:\Finetune\results\coder_base 2>$null
-scp -P 1757 root@n3.ckey.vn:/root/Finetune_Qwen2.5-0.5B/results/coder_base/result.json D:\Finetune\results\coder_base\result.json
+scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_base/result.json D:\Finetune\results\coder_base\result.json
 ```
 
 ---
@@ -121,7 +121,7 @@ python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --adapter ou
 
 # Windows:
 mkdir D:\Finetune\results\coder_r8 2>$null
-scp -P 1757 root@n3.ckey.vn:/root/Finetune_Qwen2.5-0.5B/results/coder_r8/result.json D:\Finetune\results\coder_r8\result.json
+scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_r8/result.json D:\Finetune\results\coder_r8\result.json
 ```
 
 ---
