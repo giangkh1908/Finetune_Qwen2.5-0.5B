@@ -139,7 +139,27 @@ def main():
         remove_unused_columns=False,
     )
 
-    collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False, pad_to_multiple_of=8)
+    # NOTE: tokenizer.pad() only pads model_input_names (input_ids/attention_mask),
+    # NOT `labels` -> ragged labels crash the tensor conversion whenever a batch
+    # has samples of different lengths (batch_size >= 2). Pad all three keys here.
+    pad_id = tokenizer.pad_token_id
+
+    def collate(features):
+        maxlen = max(len(f["input_ids"]) for f in features)
+        maxlen = (maxlen + 7) // 8 * 8  # pad to multiple of 8
+        input_ids, labels, attn = [], [], []
+        for f in features:
+            n = maxlen - len(f["input_ids"])
+            input_ids.append(f["input_ids"] + [pad_id] * n)
+            labels.append(f["labels"] + [-100] * n)
+            attn.append(f["attention_mask"] + [0] * n)
+        return {
+            "input_ids": torch.tensor(input_ids, dtype=torch.long),
+            "labels": torch.tensor(labels, dtype=torch.long),
+            "attention_mask": torch.tensor(attn, dtype=torch.long),
+        }
+
+    collator = collate
     trainer = Trainer(
         model=model,
         args=training_args,
