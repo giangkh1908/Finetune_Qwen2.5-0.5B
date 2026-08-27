@@ -22,7 +22,7 @@ harness/
   scorers.py        # numeric/exact/choice/constraint/unit_test
   leak_check.py     # kiểm tra eval không leak từ train (6-gram Jaccard)
   compare.py        # gộp nhiều run → bảng markdown
-serving/server.py   # FastAPI OpenAI-compatible (thay vLLM — không cần nvcc)
+serving/server.py   # FastAPI OpenAI-compatible (fallback khi không dùng vLLM)
 tools/
   build_eval.py / build_eval_coding.py / build_eval_coding_extra.py  # builder eval
   build_code_knowledge.py / build_magicoder.py / chunk_train.py       # builder train
@@ -36,55 +36,66 @@ HF model: giangkh19/qwen-0.5b-coder-r8  (adapter LoRA r=8)
 
 ---
 
-## 2. Chuẩn bị GPU (thuê)
+## 2. Chuẩn bị GPU (thuê) — template vLLM OpenAI CUDA 12.9
 
-Yêu cầu: **RTX 3090 24GB** (8GB cũng chạy được nhưng chật). Ví dụ: `ssh -p 1757 root@172.00.00`
+**Cấu hình chốt:**
+
+* **Image:** `vLLM OpenAI CUDA 12.9 — 9.06 GB` (đã có `torch` + `vllm` + `nvcc` + `ninja`, không cài lại)
+* **GPU:** `RTX 3090 24GB` / CPU `Ryzen 5 5500 6C/12T` / RAM `48GB` / SSD `338GB`
+* **Model vLLM:** `Qwen/Qwen2.5-Coder-0.5B-Instruct`
+* **Tham số vLLM (args):** `--gpu-memory-utilization 0.8 --enable-prefix-caching --served-model-name qwen-coder`
+  * `0.8` ≈ 19.2 GB / 24 GB, chừa lại cho hệ thống
+  * `--enable-prefix-caching` tái dùng KV cache cho prefix giống nhau (system prompt dài / RAG)
+  * Không cần `--tensor-parallel-size`, `--kv-cache-dtype fp8`, `--quantization` ở bước baseline — 0.5B quá nhẹ
+
+Dòng lệnh tương đương:
+```bash
+vllm serve Qwen/Qwen2.5-Coder-0.5B-Instruct \
+  --host 0.0.0.0 --port 8000 \
+  --served-model-name qwen-coder \
+  --gpu-memory-utilization 0.8 --enable-prefix-caching
+```
+
+### Boot check (đừng cài gì, chạy đúng 4 lệnh)
+
+```bash
+nvidia-smi
+df -h
+vllm --version
+python3 -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0))"
+```
+Gửi 4 output — nếu template đúng thì đi thẳng serve → test API → benchmark, không quay lại vòng `torch`/`nvcc`.
+
+### Clone repo (sau khi boot check OK)
 
 ```bash
 cd ~
 git clone https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B.git
 cd Finetune_Qwen2.5-0.5B
-
-# 1) Cài Python + pip (bare Ubuntu chưa có)
-apt update && apt install -y python3 python3-pip python3-venv git -q
-python3 --version  # 3.10.x
-pip3 --version
-
-# 2) Cài Torch KHỚP driver (driver 12.8 → dùng cu124, không dùng cu130)
-pip3 uninstall torch -y -q 2>&1 | tail -n 1; \
-pip3 install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu124 -q
-python3 -c "import torch; print('cuda:', torch.cuda.is_available(), torch.version.cuda)"
-# phải ra: cuda: True 12.4
-
-# 3) Cài deps còn lại
-pip3 install -r requirements.txt
-pip3 install bitsandbytes huggingface_hub -q  # nếu muốn QLoRA / push HF
-```
-
-Verify:
-```bash
+pip3 install -r requirements.txt -q  # chỉ harness/tools, KHÔNG cài lại torch/vllm
 python3 harness/leak_check.py          # PASS
-ls data/train/pandas_train_80k.jsonl  # 80000
-python3 -c "import json; print(len([json.loads(l) for l in open('data/eval/pandas_eval_6k.jsonl')]))"  # 6000
-python3 -c "import json; print(len([json.loads(l) for l in open('data/eval/coding.jsonl')]))"  # 200
 ```
 
 ---
 
-## 3. Baseline BEFORE (code-only, 84 câu)
+## 3. Baseline BEFORE (code-only, 84 câu) — qua vLLM
 
 ```bash
-# Direct (đơn giản nhất, chạy thẳng trên GPU)
-python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag coder_base
+# Hệ thống đã tự serve vLLM trên :8000 với model/args ở trên. Test:
+curl http://localhost:8000/v1/models
+curl http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"qwen-coder","messages":[{"role":"user","content":"Write a Python function to sort a list."}],"max_tokens":256,"temperature":0.2}'
 
-# Hoặc serve API (nếu máy khác gọi):
-python3 serving/server.py  # :8000
+# Benchmark (batch 40 = 40 request concurrent, vLLM continuous batching)
 python3 harness/run_eval.py --api http://localhost:8000/v1 --tag coder_base --batch-size 40
+# hoặc chỉ định model name nếu khác served-model-name:
+# python3 harness/run_eval.py --api http://localhost:8000/v1 --model qwen-coder --tag coder_base --batch-size 40
 ```
 
 Kết quả: `results/coder_base/result.json` — **73.9%** (84 code).
 
-> Không dùng vLLM trên cấu hình này: vLLM 0.28 FlashInfer JIT cần `nvcc`+`ninja`. `serving/server.py` (transformers) là thay thế nhẹ, cùng endpoint.
+> Fallback không vLLM (nếu muốn chạy direct): `python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag coder_base` hoặc `python3 serving/server.py` (transformers, không cần vLLM).
 
 Transfer về Windows:
 ```powershell
@@ -206,10 +217,12 @@ model = PeftModel.from_pretrained(base, "giangkh19/qwen-0.5b-coder-r8")
 
 | Vấn đề | Giải pháp |
 |--------|-----------|
+| Template vLLM báo `model not found` | Điền ô **Model vLLM**: `Qwen/Qwen2.5-Coder-0.5B-Instruct`, Args như §2 |
+| Muốn đổi 80% VRAM / cache | Sửa ô **Tham số vLLM**: `--gpu-memory-utilization 0.8 --enable-prefix-caching --served-model-name qwen-coder` rồi restart instance |
+| `No space left` / `triton 197MB` | Template 12.9 đã có sẵn, **đừng** `pip install vllm` lại; chỉ `pip install -r requirements.txt` |
+| `libtorch_cuda.so: ncclCommResume` | Sai `torch` — template 12.9 đã đúng, đừng `pip install torch` đè lên; nếu tự cài bare Ubuntu thì dùng `cu124` khớp driver |
 | `python: command not found` | `python3` |
-| `No module named vllm` | **Bỏ vLLM**, dùng `serving/server.py` |
-| vLLM `nvcc not found` / `CXXABI_1.3.15` | `LD_LIBRARY_PATH=/root/miniforge/envs/vllm/lib:$LD_LIBRARY_PATH` hoặc **bỏ vLLM** |
-| VRAM OOM khi train | Giảm `--max-seq-length 2048`, thêm `--qlora`, check `nvidia-smi` process cũ |
+| VRAM OOM khi train | 24GB dư dả với 0.5B; nếu OOM check `nvidia-smi` process cũ, `kill -9 <PID>` |
 | `git pull` báo file đè | `rm -rf results/<tag>` rồi `git pull` |
 | scp hỏi password | Chạy riêng trong PowerShell/CMD, nhập thủ công |
 | `403 Forbidden` khi push HF | Token phải **Classic Write** (không phải read), `hf auth whoami` phải ra `giangkh19` |
