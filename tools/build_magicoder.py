@@ -15,12 +15,12 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(ROOT, "data", "raw", "magicoder_oss.jsonl")
 EVAL = os.path.join(ROOT, "data", "eval", "coding.jsonl")
-OUT = os.path.join(ROOT, "data", "train", "magicoder_python_5000.jsonl")
+OUT = os.path.join(ROOT, "data", "train", "magicoder_python_8000.jsonl")
 
 SEED = 20260903
 CHARS = 3.5
 MAX = 4000
-N_SAMPLE = 5000
+N_SAMPLE = 8000
 MIN_SOL = 40
 MAX_PROB = 3000
 
