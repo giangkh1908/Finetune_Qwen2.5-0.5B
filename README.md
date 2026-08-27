@@ -45,12 +45,18 @@ cd ~
 git clone https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B.git
 cd Finetune_Qwen2.5-0.5B
 
-# Ubuntu 22.04 chưa có pip → cài trước
+# 1) Cài Python + pip (bare Ubuntu chưa có)
 apt update && apt install -y python3 python3-pip python3-venv git -q
-python3 --version  # phải ra 3.10.x
-pip3 --version     # hoặc python3 -m pip --version
+python3 --version  # 3.10.x
+pip3 --version
 
-# Cài deps (dùng pip3 hoặc python3 -m pip)
+# 2) Cài Torch KHỚP driver (driver 12.8 → dùng cu124, không dùng cu130)
+pip3 uninstall torch -y -q 2>&1 | tail -n 1; \
+pip3 install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu124 -q
+python3 -c "import torch; print('cuda:', torch.cuda.is_available(), torch.version.cuda)"
+# phải ra: cuda: True 12.4
+
+# 3) Cài deps còn lại
 pip3 install -r requirements.txt
 pip3 install bitsandbytes huggingface_hub -q  # nếu muốn QLoRA / push HF
 ```
