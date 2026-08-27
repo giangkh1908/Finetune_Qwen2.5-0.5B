@@ -62,8 +62,8 @@ def models():
 
 
 @app.post("/v1/chat/completions")
-def chat_completions(req: Request):
-    body = req.json()
+async def chat_completions(req: Request):
+    body = await req.json()
     messages = body.get("messages", [])
     max_tokens = int(body.get("max_tokens", DEFAULT_MAX_TOKENS))
     gen = _generate(messages, max_tokens)
@@ -77,8 +77,8 @@ def chat_completions(req: Request):
 
 
 @app.post("/v1/completions")
-def completions(req: Request):
-    body = req.json()
+async def completions(req: Request):
+    body = await req.json()
     prompt = body.get("prompt", "")
     max_tokens = int(body.get("max_tokens", DEFAULT_MAX_TOKENS))
     messages = [{"role": "user", "content": prompt}]
