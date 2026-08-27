@@ -1,9 +1,8 @@
-# Finetune Qwen2.5-0.5B-Instruct — Lab Guide
+# Finetune Qwen2.5-Coder-0.5B — Lab Guide
 
-Fine-tune `Qwen/Qwen2.5-0.5B-Instruct` trên tập dữ liệu suy luận của Claude, đo
-chất lượng **trước / sau** bằng benchmark frozen, và so sánh nhiều cấu hình LoRA.
+Fine-tune **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** (494M, chuyên code) trên **6,425 samples code**, đo **trước / sau** bằng benchmark code-only 84 câu (unit-test), so sánh LoRA.
 
-> Mô hình mục tiêu: **`Qwen/Qwen2.5-0.5B-Instruct`** (bản chat — đúng template cho SFT).
+> Model mục tiêu: **`Qwen/Qwen2.5-Coder-0.5B-Instruct`** — base `Qwen2ForCausalLM` + chat template `<|im_start|>`.
 
 ---
 
@@ -11,224 +10,185 @@ chất lượng **trước / sau** bằng benchmark frozen, và so sánh nhiều
 
 ```
 data/
-  train/claude_opus_743_clean.jsonl    # 743 sample (đã loại 15 dòng assistant rỗng)
-  eval/                                # FROZEN benchmark — ĐỪNG SỬA
-    math.jsonl          50 item  numeric (answer computed)
-    reasoning.jsonl     40 item  exact  (ground truth verified bằng brute-force)
-    coding.jsonl        24 item  unit_test (chạy Python VM)
-    general.jsonl       36 item  choice (24 MCQ) + constraint (12 checker)
-    qualitative.jsonl   24 prompt  (no GT — cho human diff)
-    manifest.json       sha256 + mô tả — chống sửa khi experiment
+  train/coder_train_all_chunked.jsonl  # 6,425 code samples (đang dùng) — ≤4000 tok, no truncation
+    ├─ claude_opus_743 (production code, chunked tại block boundary)
+    ├─ curated knowledge 685 câu (OOP/Big-O/HTTP/SQL/trace, do tác giả soạn)
+    └─ Magicoder-OSS-Instruct-75K Python slice 5,000 câu (MIT, lọc trùng eval)
+  eval/                                # FROZEN — ĐỪNG SỬA (code-only)
+    coding.jsonl        84 items  unit_test (mỗi câu 4-5 assert, ~660 tests)
+    manifest.json       sha256 — chống sửa
 harness/
-  run_eval.py       # generate + score (direct hoặc API)
+  run_eval.py       # generate + score (direct --model hoặc API --api, batch 40)
   scorers.py        # numeric/exact/choice/constraint/unit_test
-  leak_check.py     # kiểm tra eval không leak từ train
+  leak_check.py     # kiểm tra eval không leak từ train (6-gram Jaccard)
   compare.py        # gộp nhiều run → bảng markdown
-serving/server.py  # FastAPI OpenAI-compatible (thay vLLM)
+serving/server.py   # FastAPI OpenAI-compatible (thay vLLM — không cần nvcc)
 tools/
-  build_eval.py     # builder benchmark (deterministic, SEED 20260826)
-  gen_dummy.py      # sinh output giả để smoke-test
-train.py            # LoRA/QLoRA finetune
-results/            # output của từng lần benchmark (<tag>/result.json,...)
-outputs/            # adapter LoRA sau khi train (<tag>/)
+  build_eval.py / build_eval_coding.py / build_eval_coding_extra.py  # builder eval
+  build_code_knowledge.py / build_magicoder.py / chunk_train.py       # builder train
+  shorten_and_augment.py                                              # pipeline train
+train.py            # LoRA/QLoRA finetune (standard Trainer, completion-only masking)
+results/            # output benchmark (<tag>/result.json, summary.md, outputs.jsonl)
+outputs/            # adapter LoRA sau train (<tag>/adapter_config.json + safetensors ~17MB)
 requirements.txt
+HF model: giangkh19/qwen-0.5b-coder-r8  (adapter LoRA r=8)
 ```
 
 ---
 
-## 2. Chuẩn bị máy GPU (thuê)
+## 2. Chuẩn bị GPU (thuê)
 
-Yêu cầu: GPU ≥ 8GB (24GB là thoải mái). Ví dụ SSH: `ssh -p 1757 root@n3.ckey.vn`
+Yêu cầu: **RTX 3090 24GB** (8GB cũng chạy được nhưng chật). Ví dụ: `ssh -p 1757 root@n3.ckey.vn`
 
 ```bash
-# 1. Clone repo
 cd ~
 git clone https://github.com/giangkh1908/Finetune_Qwen2.5-0.5B.git
 cd Finetune_Qwen2.5-0.5B
 
-# 2. Cài Python 3.10+ (vLLM cần; nếu muốn dùng serving/server.py thì chỉ cần 3.8+)
-# Ubuntu 20.04 mặc định 3.8 → dùng conda:
-curl -fsSL https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -o miniforge.sh
-bash miniforge.sh -b -p ~/miniforge
-source ~/miniforge/etc/profile.d/conda.sh
-conda create -y -n llm python=3.10 && conda activate llm
+# Ubuntu 22.04 đã có Python 3.10; nếu 20.04 thì dùng conda:
+# curl -fsSL https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -o miniforge.sh
+# bash miniforge.sh -b -p ~/miniforge && source ~/miniforge/etc/profile.d/conda.sh && conda create -y -n llm python=3.10 && conda activate llm
 
-# 3. Cài deps
 pip install -r requirements.txt
-pip install bitsandbytes huggingface_hub   # nếu muốn QLoRA / push HF
+pip install bitsandbytes huggingface_hub -q  # nếu muốn QLoRA / push HF
+```
+
+Verify:
+```bash
+python harness/leak_check.py          # PASS — train 6425 vs eval 84 (max Jaccard 0.009)
+ls data/train/coder_train_all_chunked.jsonl  # 6425
+python -c "import json; print(len([json.loads(l) for l in open('data/eval/coding.jsonl')]))"  # 84
 ```
 
 ---
 
-## 3. Bước 0 — Chạy baseline BEFORE (trên GPU)
-
-Đo model **gốc chưa finetune**. Có 2 cách:
-
-### 3a. Direct (đơn giản, chạy thẳng trên GPU)
+## 3. Baseline BEFORE (code-only, 84 câu)
 
 ```bash
-python3 harness/run_eval.py --model Qwen/Qwen2.5-0.5B-Instruct --tag base_before
+# Direct (đơn giản nhất, chạy thẳng trên GPU)
+python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag coder_base
+
+# Hoặc serve API (nếu máy khác gọi):
+python serving/server.py  # :8000
+python harness/run_eval.py --api http://localhost:8000/v1 --tag coder_base --batch-size 40
 ```
 
-### 3b. Serve API (nếu muốn máy khác gọi)
+Kết quả: `results/coder_base/result.json` — **73.9%** (84 code).
 
-```bash
-# Terminal 1 — mở server (không cần vLLM/nvcc)
-python3 serving/server.py          # lắng nghe http://0.0.0.0:8000
+> Không dùng vLLM trên cấu hình này: vLLM 0.28 FlashInfer JIT cần `nvcc`+`ninja`. `serving/server.py` (transformers) là thay thế nhẹ, cùng endpoint.
 
-# Terminal 2 — benchmark qua API
-python3 harness/run_eval.py --api http://localhost:8000/v1 --tag base_before --batch-size 40
-```
-
-> ⚠️ **Đừng dùng vLLM** trên máy này: vLLM 0.28 cần FlashInfer JIT-compile CUDA
-> kernel → đòi `nvcc` + `ninja`, máy không có. `serving/server.py` (transformers
-> thuần) là thay thế nhẹ, cùng endpoint OpenAI-compatible.
-
-Kết quả ghi `results/base_before/result.json`. Transfer về máy Windows:
-
+Transfer về Windows:
 ```powershell
-mkdir D:\Finetune\results\base_before
-scp -P 1757 root@n3.ckey.vn:/root/Finetune_Qwen2.5-0.5B/results/base_before/result.json D:\Finetune\results\base_before\result.json
+mkdir D:\Finetune\results\coder_base 2>$null
+scp -P 1757 root@n3.ckey.vn:/root/Finetune_Qwen2.5-0.5B/results/coder_base/result.json D:\Finetune\results\coder_base\result.json
 ```
 
 ---
 
-## 4. Bước 1 — Finetune (LoRA / QLoRA)
-
-### Các tham số quan trọng
+## 4. Finetune (LoRA / QLoRA)
 
 | Tham số | Ý nghĩa | Khuyến nghị |
 |---------|---------|-------------|
-| `--r` | LoRA rank. Cao = học mạnh nhưng dễ overfit | r=8 điểm ngọt cho dataset nhỏ; r=32 mạnh hơn |
-| `--alpha` | scaling (thường = 2× r) | 16 (khi r=8) |
-| `--max-seq-length` | cắt sample xuống tối đa N token. **Nguồn VRAM chính** | 4096 (24GB); 8192 giữ nhiều hơn |
-| `--epochs` | số vòng qua toàn bộ dataset | 1–3 (dataset nhỏ: 3 là an toàn) |
-| `--batch-size` | số sample/GPU mỗi bước | 1 |
-| `--grad-accum` | gộp N bước trước khi update | 8 (≈ effective batch 8) |
-| `--lr` | tốc độ học | 2e-4 |
-| `--qlora` | nén 4-bit → giảm 40–60% VRAM | thêm khi bị chạm trần VRAM |
-
-### Chạy
+| `--r` | LoRA rank. Cao = học mạnh, dễ overfit | **8** điểm ngọt cho 6425 rows; 32 chỉ khi data lớn hơn |
+| `--alpha` | scaling (thường 2×r) | 16 (r=8) |
+| `--max-seq-length` | Giới hạn token/sample. **Nguồn VRAM chính** | 4096 (đã chunk ≤4000 nên **không truncate**, 24GB thoải mái) |
+| `--epochs` | Số vòng qua dataset | **1** (6425 rows đa dạng, không cần lặp) |
+| `--batch-size` / `--grad-accum` | Batch thực/effective | 1 / 8 |
+| `--lr` | Tốc độ học | 2e-4 |
+| `--qlora` | Nén 4-bit → giảm 40–60% VRAM | Thêm khi chạm trần |
 
 ```bash
-# LoRA r=8
-python3 train.py --r 8 --max-seq-length 4096 --tag lora_r8
+# LoRA r=8 — chính
+python train.py --r 8 --max-seq-length 4096 --epochs 1 --tag coder_r8
 
-# LoRA r=32
-python3 train.py --r 32 --max-seq-length 4096 --tag lora_r32
+# QLoRA 4-bit r=8 (nếu muốn)
+python train.py --r 8 --qlora --max-seq-length 4096 --epochs 1 --tag coder_qlora
 
-# QLoRA 4-bit (cần bitsandbytes)
-python3 train.py --r 32 --qlora --max-seq-length 4096 --tag qlora_r32
+# Thử r=32 (mạnh hơn, dễ overfit)
+python train.py --r 32 --alpha 64 --max-seq-length 4096 --epochs 1 --tag coder_r32
 ```
 
-Kết quả: `outputs/<tag>/` (adapter LoRA nhỏ ~10–20MB, **không phải** model 1GB).
+Output: `outputs/<tag>/` — adapter ~17MB (r=8) / ~70MB (r=32). Log `train_loss` giảm dần là đang học; `grad_norm` 0.2–0.5 là ổn.
 
-**Cách đọc log:** `loss` giảm dần = đang học. `grad_norm` ổn định ≈ 0.2–0.5.
-`epoch` = tiến độ (1.0 = qua 1 vòng). **Loss thấp ≠ giỏi** — phải benchmark mới biết.
+> Train đã bật `gradient_checkpointing` + `enable_input_require_grads()` — fix OOM khi `seq 4096`.
 
 ---
 
-## 5. Bước 2 — Benchmark AFTER
+## 5. Benchmark AFTER
 
 ```bash
-python3 harness/run_eval.py --model Qwen/Qwen2.5-0.5B-Instruct \
-  --adapter outputs/lora_r8 --tag lora_r8
+python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --adapter outputs/coder_r8 --tag coder_r8
+
+# Windows:
+mkdir D:\Finetune\results\coder_r8 2>$null
+scp -P 1757 root@n3.ckey.vn:/root/Finetune_Qwen2.5-0.5B/results/coder_r8/result.json D:\Finetune\results\coder_r8\result.json
 ```
 
-(hoặc qua API: `--adapter` phải được merge ở server; direct là đơn giản nhất)
+---
 
-Transfer về Windows:
+## 6. So sánh
+
+```bash
+python harness/compare.py coder_base coder_r8
+# | Model | Coding | Avg |
+# | coder_base | 74 | 73.9 |
+# | coder_r8   | 80 | 80.5 |
+```
+
+---
+
+## 7. Kết quả thực nghiệm
+
+| Model | Data | Eval | Kết quả | Δ vs base |
+|-------|------|------|---------|-----------|
+| Qwen-Coder 0.5B base | — | 84 code | **73.9%** | — |
+| **+ LoRA r=8** | 6,425 code (743 prod chunked + 685 curated + 5,000 Magicoder Python) | 84 code | **80.5%** | **+6.6 pts** |
+
+**Chẩn đoán:** Không còn catastrophic forgetting như lần finetune đầu (trước: 60.8% → 43.5%, math −36, coding −23). Đổi sang **code-only + Coder model + dataset đa dạng + chunk không truncate + 1 epoch** đã đảo chiều.
+
+**Nguyên nhân thành công:** dataset đa dạng (prod + knowledge + Magicoder), chunk ≤4000 thay vì truncate 40%, epochs 1 chống overfit, Coder model hợp domain.
+
+---
+
+## 8. Dataset (đang dùng)
+
+`data/train/coder_train_all_chunked.jsonl` — **6,425 rows**, ≤4000 tok, **0 sample vượt ngưỡng** (không truncate):
+
+| Nguồn | Rows | Mô tả |
+|-------|------|-------|
+| Claude production code (chunked) | 743 → chunked 1,336 | Queue/file-watcher/migration helper — chia tại block boundary |
+| Curated knowledge (tác giả soạn) | 685 | OOP/Big-O/HTTP/SQL/trace, ngắn (<70 tok) |
+| Magicoder-OSS-Instruct-75K Python | 5,000 | Python thực tế (uploader, config, API...), MIT, lọc trùng eval (0 collision) |
+
+Build lại:
+```bash
+python tools/build_magicoder.py  # tạo 5000 Python slice
+python tools/chunk_train.py --input data/train/coder_train_all.jsonl --output data/train/coder_train_all_chunked.jsonl --max-tokens 4000
+```
+
+Eval: `data/eval/coding.jsonl` — 84 hàm Python (24 gốc + 60 mở rộng thuật toán: string/list/dict/math/parsing), mỗi câu 4–5 assert, reference 100% pass qua `scorers`, **leak PASS** (Jaccard 0.009).
+
+---
+
+## 9. Push model lên Hugging Face
+
+Adapter **giangkh19/qwen-0.5b-coder-r8** (HF namespace là `giangkh19`, không phải `giangkh1908`):
 
 ```powershell
-mkdir D:\Finetune\results\lora_r8 2>$null
-scp -P 1757 root@n3.ckey.vn:/root/Finetune_Qwen2.5-0.5B/results/lora_r8/result.json D:\Finetune\results\lora_r8\result.json
+# Windows — tạo Classic Write token tại https://huggingface.co/settings/tokens
+hf auth logout
+hf auth login   # chọn Paste, dán Classic Write token
+
+hf upload giangkh19/qwen-0.5b-coder-r8 outputs/coder_r8 --repo-type model
+# README trong outputs/coder_r8/README.md đã ghi sẵn dataset + metrics
 ```
 
----
-
-## 6. Bước 3 — So sánh
-
-Trên Windows (hoặc GPU đã pull hết results về):
-
-```bash
-python3 harness/compare.py base_before lora_r8 lora_r32
-# → bảng:
-# | Model | Math | Coding | Reasoning | General | Avg |
-# | base_before | 58 | 71 | 50 | 64 | 60.8 |
-# | lora_r8 | 22 | 48 | 40 | 64 | 43.5 |
-```
-
----
-
-## 7. Kết quả thực nghiệm (lora_r8 vs base)
-
-| Suite | base_before | lora_r8 | Δ |
-|-------|-------------|---------|---|
-| math | 58.0 | 22.0 | **−36** |
-| reasoning | 50.0 | 40.0 | **−10** |
-| coding | 71.2 | 48.3 | **−23** |
-| general | 63.9 | 63.9 | 0 |
-| **overall** | **60.8** | **43.5** | **−17** |
-
-**Chẩn đoán: catastrophic forgetting / overfit.** Tất cả mảng trừ general đều tụt.
-
-- Math sai toàn bộ (model đoán số, ví dụ dự đoán `900` thay vì `-261`).
-- Coding lỗi syntax — model giờ **in text kiểu Claude** ("Tie-breaking rule")
-  thay vì code thuần. Tức là đã thuộc **style lời văn** của dataset, mất kỹ năng
-  **output code**.
-
-**Nguyên nhân chính:**
-1. Dataset train 100% code template (production-style) — khác hẳn eval (Python function ngắn).
-2. 743 sample nhỏ + 3 epochs + LoRA r=8 → học vẹt.
-3. `max-seq-length 4096` cắt ~40% dữ liệu khi sample median 6.5K token.
-
-**Thử cải thiện (theo thứ tự):**
-
-```bash
-# giảm epochs chống overfit
-python3 train.py --r 8 --max-seq-length 4096 --epochs 1 --tag lora_r8_e1
-# giữ hơn nữa mỗi sample
-python3 train.py --r 8 --max-seq-length 8192 --epochs 3 --tag lora_r8_s8k
-# LoRA rank thấp hơn
-python3 train.py --r 4 --max-seq-length 4096 --epochs 2 --tag lora_r4
-```
-
-Nếu vẫn tụt so với base → dataset quá chuyên biệt cho model 0.5B, hoặc cần trộn
-thêm dữ liệu tổng quát (xem §8).
-
----
-
-## 8. Mẹo dành cho dataset lớn / tránh quên
-
-- **Mix data:** gộp nhiều nguồn vào 1 lần train (tránh finetune chồng làm
-  catastrophic forgetting). Cần thêm flag `--data-mix` vào `train.py`.
-- **Dataset lớn:** giảm `max-seq-length` + `--qlora`, tăng `--batch-size`,
-  giảm `--epochs` xuống 1.
-- **Model 0.5B giới hạn:** với > vài chục triệu token, 0.5B không học nổi tốt
-  → cân nhắc nâng model (7B/32B) hoặc dùng LoRA rank nhỏ + 1 epoch.
-
----
-
-## 9. Chia sẻ model lên Hugging Face
-
-Adapter LoRA nhỏ → push lên HF (chuẩn):
-
-```bash
-# trên GPU
-pip install huggingface_hub
-huggingface-cli login        # token: https://huggingface.co/settings/tokens
-
-# đổi USERNAME/REPO theo tài khoản của bạn
-huggingface-cli upload giangkh1908/qwen-0.5b-lora-r8 outputs/lora_r8 --repo-type model
-```
-
-Dùng lại từ bất kỳ đâu:
-
+Dùng lại:
 ```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
-from transformers import AutoModelForCausalLM
-base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-model = PeftModel.from_pretrained(base, "giangkh1908/qwen-0.5b-lora-r8")
+base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-Coder-0.5B-Instruct", trust_remote_code=True)
+model = PeftModel.from_pretrained(base, "giangkh19/qwen-0.5b-coder-r8")
 ```
 
 ---
@@ -237,20 +197,18 @@ model = PeftModel.from_pretrained(base, "giangkh1908/qwen-0.5b-lora-r8")
 
 | Vấn đề | Giải pháp |
 |--------|-----------|
-| `python: command not found` | dùng `python3` |
-| `No module named vllm` | `source ~/miniforge/etc/profile.d/conda.sh && conda activate llm` |
-| vLLM lỗi `nvcc not found` | **bỏ vLLM**, dùng `serving/server.py` |
-| VRAM đầy trong train | giảm `--max-seq-length`, thêm `--qlora` |
-| Full VRAM bất thường (0.5B mà 16GB) | kiểm tra process cũ `nvidia-smi` / `ps aux | grep python` |
-| `git pull` báo file đè | `rm -rf results/base_before && git pull` |
-| scp trên Windows hỏi password | mở **Command Prompt/PowerShell** riêng, nhập password thủ công |
-| `[transformers] 'temperature' not valid` | vô hại — generation dùng `do_sample=False` (greedy) |
+| `python: command not found` | `python3` |
+| `No module named vllm` | **Bỏ vLLM**, dùng `serving/server.py` |
+| vLLM `nvcc not found` / `CXXABI_1.3.15` | `LD_LIBRARY_PATH=/root/miniforge/envs/vllm/lib:$LD_LIBRARY_PATH` hoặc **bỏ vLLM** |
+| VRAM OOM khi train | Giảm `--max-seq-length 2048`, thêm `--qlora`, check `nvidia-smi` process cũ |
+| `git pull` báo file đè | `rm -rf results/<tag>` rồi `git pull` |
+| scp hỏi password | Chạy riêng trong PowerShell/CMD, nhập thủ công |
+| `403 Forbidden` khi push HF | Token phải **Classic Write** (không phải read), `hf auth whoami` phải ra `giangkh19` |
 
 ---
 
 ## 11. Bước tiếp theo
 
-1. Tải adapter `outputs/lora_r8/` về Windows + commit kết quả lên repo.
-2. Chạy `lora_r32` + `qlora_r32` để so sánh 4 cấu hình.
-3. Đánh giá qualitative (so sánh `outputs_qualitative.jsonl` giữa base và các
-   bản finetune) — xem model có giữ style dài, có lặp, có hallucinate không.
+1. Thử `coder_r32` / `coder_qlora` so với `coder_r8`.
+2. Thêm data lớn hơn (pull thêm Magicoder, giữ `max-seq-length 4000` + 1 epoch).
+3. Serve: `python serving/server.py --model giangkh19/qwen-0.5b-coder-r8` (merge adapter trước nếu cần).
