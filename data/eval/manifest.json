@@ -1,13 +1,17 @@
 {
   "seed": 20260826,
   "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
-  "note": "Frozen code-only benchmark. Used suites: coding only. Other suites (math/reasoning/general/qualitative) removed for this lab.",
+  "note": "Frozen benchmarks: coding 200 + pandas 6k. Use --suites to select.",
   "files": {
     "coding.jsonl": {
       "count": 200,
       "sha256": "66afd2213ee94a55e6b5771fbe3cc08f9e8703185b4d8b511bb328b73023cd69"
+    },
+    "pandas_eval_6k.jsonl": {
+      "count": 6000,
+      "sha256": "bf8fc2aa4af6f0706449083364b5a7512c04d325ed12331c6795e99155ea4aad"
     }
   },
-  "total_auto": 200,
+  "total_auto": 6200,
   "total_qualitative": 0
 }
