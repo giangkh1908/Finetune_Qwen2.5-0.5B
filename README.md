@@ -59,9 +59,15 @@ python3 -c "import torch; print(torch.__version__, torch.version.cuda, torch.cud
 ```
 Serve giống hệt dưới, giữ nguyên args. `pip install -r requirements.txt` sau đó không được đè torch (`torch>=2.1` đã thỏa).
 
-**Không cần `nvcc`:** serving bằng torch/vLLM binary không cần CUDA Toolkit; chỉ JIT kernel (flashinfer build v.v.) mới cần, 0.8.5 không bắt.
+**`nvcc` và FlashInfer JIT:** vLLM 0.28 mặc định dùng FlashInfer sampler — kernel này **JIT-compile lúc khởi động, cần `nvcc`**. Image không có CUDA Toolkit → server crash ngay sau load model (lỗi dạng `nvcc: command not found` / flashinfer jit / `Failed to ... top_k_renorm`). Cách sửa nhanh nhất, đã kiểm chứng trên máy 3090 image này:
 
-### Cài môi trường (làm đúng thứ tự)
+```bash
+export VLLM_USE_FLASHINFER_SAMPLER=0    # fallback sampler top-k/top-p gốc của vLLM, không cần nvcc
+```
+
+Với model 0.5B + greedy sampling (nhiệt độ 0 khi benchmark), chênh lệch tốc độ giữa 2 sampler gần như bằng 0 — set env var này là đủ, đừng cài cả CUDA Toolkit. (Nếu muốn giữ FlashInfer: `pip install nvidia-cuda-nvcc-cu13` cho torch cu13 / `-cu12` cho cu12, thêm vào PATH — không cần thiết ở đây.)
+
+### Cài môi trường — Nhánh A (4070/550), làm đúng thứ tự:
 
 ```bash
 rm -rf .venv
@@ -86,12 +92,13 @@ python3 -c "import torch, vllm; print(torch.__version__, torch.version.cuda, vll
 ### Serve
 
 ```bash
+export VLLM_USE_FLASHINFER_SAMPLER=0   # BẮT BUỘC trên image không có nvcc (xem trên)
 vllm serve Qwen/Qwen2.5-Coder-0.5B-Instruct \
   --host 0.0.0.0 --port 8000 \
   --served-model-name qwen-coder \
   --gpu-memory-utilization 0.8 --max-model-len 8192 --enable-prefix-caching
 ```
-* `0.8` ≈ 12.8 GB / 16 GB — model 0.5B (~1GB bf16) nên phần lớn là KV cache, rất dư
+* `0.8` ≈ 12.8 GB/16 GB (4070) hoặc 19.2 GB/24 GB (3090) — model 0.5B (~1GB bf16) nên phần lớn là KV cache, rất dư
 * `--max-model-len 8192` đủ cho prompt pandas (~350 tok) + headroom
 * Không cần tensor-parallel / quantization
 
@@ -112,7 +119,7 @@ python3 harness/leak_check.py          # xem ghi chú overlap §8 (báo FAIL có
 ## 3. Baseline BEFORE (6k pandas, exact match) — qua vLLM
 
 ```bash
-# Sau khi `vllm serve` ở §2 đã chạy trên :8000. Test:
+# Sau khi `vllm serve` ở §2 đã chạy trên :8000 (nhớ `export VLLM_USE_FLASHINFER_SAMPLER=0` trước khi serve). Test:
 curl http://localhost:8000/v1/models
 curl http://localhost:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
@@ -181,6 +188,7 @@ m=PeftModel.from_pretrained(AutoModelForCausalLM.from_pretrained(base, torch_dty
 m.save_pretrained('merged_pandas_r8'); AutoTokenizer.from_pretrained(base).save_pretrained('merged_pandas_r8')"
 
 # 2) Serve model đã merge
+export VLLM_USE_FLASHINFER_SAMPLER=0
 vllm serve merged_pandas_r8 --host 0.0.0.0 --port 8000 --served-model-name qwen-coder \
   --gpu-memory-utilization 0.8 --max-model-len 8192 --enable-prefix-caching
 
@@ -294,9 +302,9 @@ Adapter code cũ `giangkh19/qwen-0.5b-coder-r8` vẫn còn trên HF (thí nghi�
 
 | Vấn đề | Giải pháp |
 |--------|-----------|
-| vLLM startup fail `ncclCommResume` / undefined symbol | torch bị kéo bản cu12.9/cu13 (mặc định PyPI) trong khi driver chỉ 550 — cài lại đúng §2: torch `2.6.0+cu124` + `vllm==0.8.5`. Đừng `pip install -U vllm` |
-| `pip install vllm` kéo torch mới đè cu124 | Dùng `pip install vllm==0.8.5 --extra-index-url https://download.pytorch.org/whl/cu124`, kiểm tra `torch.__version__` còn `+cu124` |
-| Muốn dùng vLLM 0.27/0.28 mới | Bắt buộc nâng driver ≥580 (CUDA 13) — provider cho đổi image thì đổi, không có workaround cho 4070 |
+| vLLM startup fail `ncclCommResume` / undefined symbol | torch bị kéo bản cu12.9/cu13 (mặc định PyPI) trong khi driver chỉ 550 — cài lại đúng §2 nhánh A: torch `2.6.0+cu124` + `vllm==0.8.5`. Đừng `pip install -U vllm` |
+| vLLM 0.28 crash lúc start với lỗi `nvcc not found` / flashinfer JIT / top_k_renorm | `export VLLM_USE_FLASHINFER_SAMPLER=0` rồi serve lại — image không có CUDA Toolkit, sampler kernel cần nvcc JIT. Đã kiểm chứng trên 3090/driver 590 (27/8/2026). Không ảnh hưởng kết quả benchmark (temperature=0) |
+| `pip install vllm` kéo torch mới đè cu124 (nhánh A) | Dùng `pip install vllm==0.8.5 --extra-index-url https://download.pytorch.org/whl/cu124`, kiểm tra `torch.__version__` còn `+cu124` |
 | `ERROR: manifest mismatch` | `data/eval/` đã bị sửa sau freeze — `git checkout data/eval/` khôi phục, đừng tự vá hash |
 | `No space left` | torch cu124 + vllm ~8GB; dọn `~/.cache/pip` hoặc clone model bằng `HF_HOME` chỉ định ổ còn trống |
 | `python: command not found` | `python3` |

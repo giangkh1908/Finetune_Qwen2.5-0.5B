@@ -4,8 +4,9 @@ modes:
   1) Direct (GPU thuê load model):
      python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag pandas_base
 
-  2) API serving (vLLM 0.8.5 + torch 2.6.0+cu124, xem README §2):
-     # terminal 1: serve
+  2) API serving (vLLM, xem README §2):
+     # terminal 1: serve (image không có nvcc thì export trước — README §2/§10):
+     export VLLM_USE_FLASHINFER_SAMPLER=0
      vllm serve Qwen/Qwen2.5-Coder-0.5B-Instruct --port 8000 --served-model-name qwen-coder \
        --gpu-memory-utilization 0.8 --max-model-len 8192 --enable-prefix-caching
      # terminal 2: benchmark qua API (không cần torch, chạy ở laptop cũng được)
