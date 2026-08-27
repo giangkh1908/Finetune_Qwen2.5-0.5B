@@ -37,7 +37,7 @@ import scorers  # noqa: E402
 def load_eval_items(eval_dir: Path, suites=None):
     items = []
     if suites is None:
-        suites = ["coding.jsonl"]
+        suites = ["pandas_eval_6k.jsonl"]
     for name in suites:
         path = eval_dir / name
         if not path.exists():

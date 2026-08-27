@@ -1,17 +1,12 @@
 {
-  "seed": 20260826,
+  "seed": 20261101,
   "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
-  "note": "Frozen benchmarks: coding 200 + pandas 6k. Use --suites to select.",
+  "note": "Text-to-pandas benchmark: 6k held-out, exact match",
   "files": {
-    "coding.jsonl": {
-      "count": 200,
-      "sha256": "66afd2213ee94a55e6b5771fbe3cc08f9e8703185b4d8b511bb328b73023cd69"
-    },
     "pandas_eval_6k.jsonl": {
       "count": 6000,
       "sha256": "bf8fc2aa4af6f0706449083364b5a7512c04d325ed12331c6795e99155ea4aad"
     }
   },
-  "total_auto": 6200,
-  "total_qualitative": 0
+  "total_auto": 6000
 }
