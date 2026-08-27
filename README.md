@@ -57,10 +57,10 @@ pip3 install bitsandbytes huggingface_hub -q  # nếu muốn QLoRA / push HF
 
 Verify:
 ```bash
-python harness/leak_check.py          # PASS
+python3 harness/leak_check.py          # PASS
 ls data/train/pandas_train_80k.jsonl  # 80000
-python -c "import json; print(len([json.loads(l) for l in open('data/eval/pandas_eval_6k.jsonl')]))"  # 6000
-python -c "import json; print(len([json.loads(l) for l in open('data/eval/coding.jsonl')]))"  # 200
+python3 -c "import json; print(len([json.loads(l) for l in open('data/eval/pandas_eval_6k.jsonl')]))"  # 6000
+python3 -c "import json; print(len([json.loads(l) for l in open('data/eval/coding.jsonl')]))"  # 200
 ```
 
 ---
@@ -69,11 +69,11 @@ python -c "import json; print(len([json.loads(l) for l in open('data/eval/coding
 
 ```bash
 # Direct (đơn giản nhất, chạy thẳng trên GPU)
-python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag coder_base
+python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --tag coder_base
 
 # Hoặc serve API (nếu máy khác gọi):
-python serving/server.py  # :8000
-python harness/run_eval.py --api http://localhost:8000/v1 --tag coder_base --batch-size 40
+python3 serving/server.py  # :8000
+python3 harness/run_eval.py --api http://localhost:8000/v1 --tag coder_base --batch-size 40
 ```
 
 Kết quả: `results/coder_base/result.json` — **73.9%** (84 code).
@@ -102,13 +102,13 @@ scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_base/res
 
 ```bash
 # LoRA r=8 — chính
-python train.py --r 8 --max-seq-length 4096 --epochs 1 --tag coder_r8
+python3 train.py --r 8 --max-seq-length 4096 --epochs 1 --tag coder_r8
 
 # QLoRA 4-bit r=8 (nếu muốn)
-python train.py --r 8 --qlora --max-seq-length 4096 --epochs 1 --tag coder_qlora
+python3 train.py --r 8 --qlora --max-seq-length 4096 --epochs 1 --tag coder_qlora
 
 # Thử r=32 (mạnh hơn, dễ overfit)
-python train.py --r 32 --alpha 64 --max-seq-length 4096 --epochs 1 --tag coder_r32
+python3 train.py --r 32 --alpha 64 --max-seq-length 4096 --epochs 1 --tag coder_r32
 ```
 
 Output: `outputs/<tag>/` — adapter ~17MB (r=8) / ~70MB (r=32). Log `train_loss` giảm dần là đang học; `grad_norm` 0.2–0.5 là ổn.
@@ -120,7 +120,7 @@ Output: `outputs/<tag>/` — adapter ~17MB (r=8) / ~70MB (r=32). Log `train_loss
 ## 5. Benchmark AFTER
 
 ```bash
-python harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --adapter outputs/coder_r8 --tag coder_r8
+python3 harness/run_eval.py --model Qwen/Qwen2.5-Coder-0.5B-Instruct --adapter outputs/coder_r8 --tag coder_r8
 
 # Windows:
 mkdir D:\Finetune\results\coder_r8 2>$null
@@ -132,7 +132,7 @@ scp -P <PORT> <USER>@<GPU_IP>:/root/Finetune_Qwen2.5-0.5B/results/coder_r8/resul
 ## 6. So sánh
 
 ```bash
-python harness/compare.py coder_base coder_r8
+python3 harness/compare.py coder_base coder_r8
 # | Model | Coding | Avg |
 # | coder_base | 74 | 73.9 |
 # | coder_r8   | 80 | 80.5 |
@@ -165,8 +165,8 @@ python harness/compare.py coder_base coder_r8
 
 Build lại:
 ```bash
-python tools/build_magicoder.py  # tạo 5000 Python slice
-python tools/chunk_train.py --input data/train/coder_train_all.jsonl --output data/train/coder_train_all_chunked.jsonl --max-tokens 4000
+python3 tools/build_magicoder.py  # tạo 5000 Python slice
+python3 tools/chunk_train.py --input data/train/coder_train_all.jsonl --output data/train/coder_train_all_chunked.jsonl --max-tokens 4000
 ```
 
 Eval: `data/eval/coding.jsonl` — 84 hàm Python (24 gốc + 60 mở rộng thuật toán: string/list/dict/math/parsing), mỗi câu 4–5 assert, reference 100% pass qua `scorers`, **leak PASS** (Jaccard 0.009).
