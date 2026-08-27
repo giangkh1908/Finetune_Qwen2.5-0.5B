@@ -1,0 +1,772 @@
+{
+  "tag": "coder_r8",
+  "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "api": null,
+  "api_model": null,
+  "adapter": "outputs/coder_r8",
+  "counts": {
+    "coding": 84
+  },
+  "aggregate": {
+    "coding": 0.8049603174603176,
+    "overall": 0.8049603174603176
+  },
+  "results": [
+    {
+      "id": "coding_001",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.8,
+      "reason": "4/5 RESULT 4/5",
+      "response_preview": "```python def fizzbuzz(n):     return [str(i) if i % 3 == 0 and i % 5 == 0 else \"Fizz\" if i % 3 == 0 else \"Buzz\" if i % 5 == 0 else str(i) for i in range(1, n + 1)] ``` Time complexity: O(n) Space com"
+    },
+    {
+      "id": "coding_002",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def is_palindrome(s):     s = s.lower()     s = ''.join(char for char in s if char.isalnum())     return s == s[::-1] ``` Time complexity: O(n), where n is the length of the string. Space co"
+    },
+    {
+      "id": "coding_003",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def fib(n):     if n == 0:         return 0     elif n == 1:         return 1     else:         a, b = 0, 1         for _ in range(2, n + 1):             a, b = b, a + b         return b ```"
+    },
+    {
+      "id": "coding_004",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def two_sum(nums, target):     seen = {}     for i, num in enumerate(nums):         if target - num in seen:             return [seen[target - num], i]         seen[num] = i ``` Time complex"
+    },
+    {
+      "id": "coding_005",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def reverse_words(s):     return ' '.join(reversed(s.split())) ``` Time complexity: O(n), where n is the length of the input string. Space complexity: O(n) for the reversed string."
+    },
+    {
+      "id": "coding_006",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def count_vowels(s):     return sum(1 for c in s.lower() if c in 'aeiou') ``` This solution iterates through each character in the input string, converts it to lowercase, and checks if it is"
+    },
+    {
+      "id": "coding_007",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def flatten(lst):     return [item for sublist in lst for item in sublist] ``` Time complexity: O(n), where n is the total number of elements in the input list. Space complexity: O(1) since "
+    },
+    {
+      "id": "coding_008",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def binary_search(arr, x):     left, right = 0, len(arr) - 1     while left <= right:         mid = (left + right) // 2         if arr[mid] == x:             return mid         elif arr[mid]"
+    },
+    {
+      "id": "coding_009",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def gcd(a, b):     while b:         a, b = b, a % b     return a ```"
+    },
+    {
+      "id": "coding_010",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "6/6 RESULT 6/6",
+      "response_preview": "```python def is_prime(n):     if n < 2:         return False     for i in range(2, int(n**0.5) + 1):         if n % i == 0:             return False     return True ``` This solution iterates through"
+    },
+    {
+      "id": "coding_011",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 IndexError: list assignment index out of range",
+      "response_preview": "```python def merge_sorted(a, b):     i = j = k = 0     while i < len(a) and j < len(b):         if a[i] < b[j]:             a[k] = a[i]             i += 1         else:             a[k] = b[j]       "
+    },
+    {
+      "id": "coding_012",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def remove_duplicates(lst):     seen = set()     return [x for x in lst if x not in seen and not seen.add(x)] ``` Time complexity: O(n) where n is the length of the input list. Space complex"
+    },
+    {
+      "id": "coding_013",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def longest_word(s):     return max(s.split(), key=len) ``` Time complexity: O(n), where n is the length of the input string. Space complexity: O(1) since we're using built-in functions."
+    },
+    {
+      "id": "coding_014",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def caesar(s, shift):     def shift_char(c):         if c.isalpha():             base = ord('a') if c.islower() else ord('A')             return chr((ord(c) - base + shift) % 26 + base)     "
+    },
+    {
+      "id": "coding_015",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def is_anagram(a, b):     return sorted(a.lower().replace(\" \", \"\")) == sorted(b.lower().replace(\" \", \"\")) ``` Time complexity: O(n) where n is the length of the strings. Space complexity: O("
+    },
+    {
+      "id": "coding_016",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def transpose(m):     if not m:         return []     return [list(row) for row in zip(*m)] ``` Time complexity: O(m * n), where m is the number of rows and n is the number of columns. Space"
+    },
+    {
+      "id": "coding_017",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def prime_factors(n):     factors = []     divisor = 2     while n > 1:         while n % divisor == 0:             factors.append(divisor)             n //= divisor         divisor += 1    "
+    },
+    {
+      "id": "coding_018",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.6,
+      "reason": "3/5 RESULT 3/5",
+      "response_preview": "```python def balanced(s):     stack = []     for c in s:         if c == '(' or c == '[' or c == '{':             stack.append(c)         elif c == ')' or c == ']' or c == '}':             if not sta"
+    },
+    {
+      "id": "coding_019",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def rle(s):     res = []     i = 0     while i < len(s):         count = 1         while i + 1 < len(s) and s[i] == s[i+1]:             count += 1             i += 1         res.append([s[i]"
+    },
+    {
+      "id": "coding_020",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 IndexError: list index out of range",
+      "response_preview": "```python def pascal_row(n):     if n == 0:         return [1]     elif n == 1:         return [1, 1]     else:         row = [1]         for i in range(2, n + 1):             row.append(row[i - 1] + "
+    },
+    {
+      "id": "coding_021",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.75,
+      "reason": "3/4 ZeroDivisionError: integer division or modulo by zero",
+      "response_preview": "```python def rotate_list(lst, k):     n = len(lst)     k %= n  # Handle cases where k is larger than the length of the list     return lst[-k:] + lst[:-k] ``` Time complexity: O(n) since we are itera"
+    },
+    {
+      "id": "coding_022",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 RESULT 2/4",
+      "response_preview": "```python def second_largest(lst):     seen = set()     for x in lst:         if x not in seen:             seen.add(x)     if len(seen) < 2:         return None     else:         return max(seen) ```"
+    },
+    {
+      "id": "coding_023",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.6666666666666666,
+      "reason": "4/6 RESULT 4/6",
+      "response_preview": "```python def is_valid_date(s):     try:         year, month, day = map(int, s.split('-'))         if month < 1 or month > 12:             return False         if day < 1 or day > 31:             retu"
+    },
+    {
+      "id": "coding_024",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.8,
+      "reason": "4/5 ModuleNotFoundError: No module named 'pytest'",
+      "response_preview": "```python def chunk(lst, size):     if not lst:         return []     if size <= 0:         raise ValueError(\"size must be > 0\")     return [lst[i:i+size] for i in range(0, len(lst), size)] ``` | Time"
+    },
+    {
+      "id": "code_extra_001",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python import string  def is_anagram_phrase(a, b):     # Remove punctuation and convert to lowercase for comparison     cleaned_a = ''.join(char.lower() for char in a if char.isalnum())     cleaned"
+    },
+    {
+      "id": "code_extra_002",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.2,
+      "reason": "1/5 RESULT 1/5",
+      "response_preview": "```python def compress(s):     if not s:         return \"\"      result = []     count = 1     prev_char = s[0]      for i in range(1, len(s)):         if s[i] == prev_char:             count += 1     "
+    },
+    {
+      "id": "code_extra_003",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def insert_separator(s, sep):     return sep.join(s) ``` The `join` method is used to concatenate the elements of the list `s` with the separator `sep`."
+    },
+    {
+      "id": "code_extra_004",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.2,
+      "reason": "1/5 RESULT 1/5",
+      "response_preview": "```python def squeeze(s):     if not s:         return \"\"      i = 0     while i < len(s) - 1:         if s[i] == s[i + 1]:             i += 1         else:             i += 1      return s[:i] ```  *"
+    },
+    {
+      "id": "code_extra_005",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.8,
+      "reason": "4/5 RESULT 4/5",
+      "response_preview": "```python def is_pangram(s):     return set(s.lower()) == set('abcdefghijklmnopqrstuvwxyz') ``` This solution uses Python's built-in set operations to check if all letters in the input string are pres"
+    },
+    {
+      "id": "code_extra_006",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def remove_dup_keep_order(s):     seen = set()     result = []     for char in s:         if char not in seen:             seen.add(char)             result.append(char)     return ''.join(r"
+    },
+    {
+      "id": "code_extra_007",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def word_len_map(words):     return {word: len(word) for word in words} ```  This solution uses a dictionary comprehension to iterate through the list of words and populate the dictionary wi"
+    },
+    {
+      "id": "code_extra_008",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def running_sum(nums):     return [sum(nums[:i+1]) for i in range(len(nums))] ``` This solution uses list comprehension to iterate through the input list and calculate the running sum for ea"
+    },
+    {
+      "id": "code_extra_009",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.75,
+      "reason": "3/4 RESULT 3/4",
+      "response_preview": "```python def count_negatives(grid):     return sum(1 for row in grid if any(num < 0 for num in row)) ```  The `sum` function iterates through each row of the grid and applies the condition to check i"
+    },
+    {
+      "id": "code_extra_010",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.25,
+      "reason": "1/4 RESULT 1/4",
+      "response_preview": "```python def matrix_identity(n):     return [[0 if i == j else 1 for j in range(n)] for i in range(n)] ``` ```python def matrix_identity(n):     return [[0 if i == j else 1 for j in range(n)] for i i"
+    },
+    {
+      "id": "code_extra_011",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.25,
+      "reason": "1/4 TypeError: 'set' object is not subscriptable",
+      "response_preview": "```python def pair_sum_indices(nums, target):     seen = set()     for i in range(len(nums)):         complement = target - nums[i]         if complement in seen:             return [seen[complement],"
+    },
+    {
+      "id": "code_extra_012",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def flatten_one(grid):     return [item for sublist in grid for item in sublist] ```  The `flatten_one` function iterates through each sublist in the input grid and then through each item wi"
+    },
+    {
+      "id": "code_extra_013",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def min_max(nums):     if not nums:         return (None, None)          min_val = min(nums)     max_val = max(nums)          return (min_val, max_val) ```  This solution iterates through th"
+    },
+    {
+      "id": "code_extra_014",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def common_elements(a, b):     return sorted(set(a) & set(b)) ```  The `common_elements` function takes two lists `a` and `b` as input. It uses the `set` data structure to remove any duplica"
+    },
+    {
+      "id": "code_extra_015",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 ValueError: max() arg is an empty sequence",
+      "response_preview": "```python def most_frequent_char(s: str) -> str:     char_count = {}     for c in s:         if c in char_count:             char_count[c] += 1         else:             char_count[c] = 1      max_cou"
+    },
+    {
+      "id": "code_extra_016",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def is_palindrome_list(nums):     return nums == nums[::-1] ```  The `is_palindrome_list` function simply checks if the input list is equal to its reverse using Python's slicing feature `num"
+    },
+    {
+      "id": "code_extra_017",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.2,
+      "reason": "1/5 RESULT 1/5",
+      "response_preview": "```python def dedupe_count(nums):     seen = set()     result = {}     for num in nums:         if num not in seen:             seen.add(num)             result[num] = result.get(num, 0) + 1     retur"
+    },
+    {
+      "id": "code_extra_018",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def is_power_of_two(n):     return n > 0 and n & (n - 1) == 0 ``` This solution uses bitwise operations to determine if a number is a power of two. The expression `n & (n - 1)` effectively r"
+    },
+    {
+      "id": "code_extra_019",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.0,
+      "reason": "0/4 RESULT 0/4",
+      "response_preview": "```python def count_primes(limit):     if limit < 2:         return 0      is_prime = [True] * (limit + 1)     p = 2     while p * p <= limit:         if is_prime[p]:             for i in range(p * p,"
+    },
+    {
+      "id": "code_extra_020",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.0,
+      "reason": "0/4 NameError: name 'reduce' is not defined",
+      "response_preview": "```python def gcd_many(nums):     return reduce(gcd, nums) ``` This solution uses Python's built-in `reduce` function to compute the greatest common divisor of all numbers in the list."
+    },
+    {
+      "id": "code_extra_021",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def decimal_to_binary(n):     if n == 0:         return \"0\"     binary = \"\"     while n > 0:         binary = str(n % 2) + binary         n //= 2     return binary ``` **Explanation:** - If "
+    },
+    {
+      "id": "code_extra_022",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def nth_fib(n):     if n == 0:         return 0     elif n == 1:         return 1     else:         a, b = 0, 1         for _ in range(2, n + 1):             a, b = b, a + b         return b"
+    },
+    {
+      "id": "code_extra_023",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def is_triangle(a, b, c):     return a + b > c and a + c > b and b + c > a ``` This function checks if the given sides can form a non-degenerate triangle using the triangle inequality theore"
+    },
+    {
+      "id": "code_extra_024",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python import math  def area_of_circle(r):     return round(math.pi * r**2, 2) ```"
+    },
+    {
+      "id": "code_extra_025",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python import math  def distance(x1, y1, x2, y2):     return round(math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2), 2) ```"
+    },
+    {
+      "id": "code_extra_026",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def get_or_default(d, key, default):     return d.get(key, default) ```  This solution uses Python's built-in `get` method to retrieve the value associated with the given key from the dictio"
+    },
+    {
+      "id": "code_extra_027",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def stack_to_list(stack):     return list(reversed(stack)) ```  The `stack_to_list` function takes a stack as input, reverses the order of its elements using `list(reversed(stack))`, and the"
+    },
+    {
+      "id": "code_extra_028",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def rotate_matrix_90(m):     return [list(reversed(row)) for row in zip(*m)] ``` Time: O(n) where n is the number of rows/columns. Space: O(1)."
+    },
+    {
+      "id": "code_extra_029",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 RESULT 2/4",
+      "response_preview": "```python def index_of_second(nums, x):     for i in range(len(nums)):         if nums[i] == x:             if i + 1 < len(nums) and nums[i + 1] == x:                 return i     return -1 ```  This "
+    },
+    {
+      "id": "code_extra_030",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.6,
+      "reason": "3/5 RESULT 3/5",
+      "response_preview": "```python import re  def is_valid_email(s):     if '@' not in s:         return False     parts = s.split('@')     if len(parts) != 2:         return False     domain = parts[1]     if '.' not in doma"
+    },
+    {
+      "id": "code_extra_031",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def count_columns(grid):     return max(len(row) for row in grid) if grid else 0 ``` This solution iterates through each row in the grid and calculates the length of the longest row, returni"
+    },
+    {
+      "id": "code_extra_032",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def char_count_word(s: str, ch: str) -> int:     return sum(1 for c in s.lower() if c == ch.lower()) ```  This solution iterates through the input string `s` and counts the occurrences of th"
+    },
+    {
+      "id": "code_extra_033",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 RESULT 2/4",
+      "response_preview": "```python def chunk_count(lst, size):     return len(lst) // size ``` This solution directly calculates the number of chunks by dividing the length of the list by the specified chunk size and returnin"
+    },
+    {
+      "id": "code_extra_034",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def to_pig_latin(s):     if not s:         return \"\"      # Split the word into two parts: the first letter and the rest of the word     first_letter = s[0]     rest_of_word = s[1:]      # M"
+    },
+    {
+      "id": "code_extra_035",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def binary_to_decimal(b):     return sum(int(digit) * (2 ** i) for i, digit in enumerate(reversed(b))) ``` This solution uses Python's built-in `reversed` function and list comprehension to "
+    },
+    {
+      "id": "code_extra_036",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def longest_common_prefix(strs):     if not strs:         return \"\"      prefix = strs[0]     for s in strs[1:]:         while not s.startswith(prefix):             prefix = prefix[:-1]     "
+    },
+    {
+      "id": "code_extra_037",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def first_unique_char(s: str) -> int:     char_count = {}     for i, c in enumerate(s):         if c in char_count:             char_count[c] += 1         else:             char_count[c] = 1"
+    },
+    {
+      "id": "code_extra_038",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def max_profit(prices):     min_price = float('inf')     max_profit = 0      for price in prices:         if price < min_price:             min_price = price         elif price - min_price >"
+    },
+    {
+      "id": "code_extra_039",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def group_anagrams(words):     anagram_groups = {}     for word in words:         sorted_word = ''.join(sorted(word))         if sorted_word in anagram_groups:             anagram_groups[sor"
+    },
+    {
+      "id": "code_extra_040",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 RESULT 2/4",
+      "response_preview": "```python def move_zeroes(nums):     zero_count = 0     for i in range(len(nums)):         if nums[i] == 0:             zero_count += 1         else:             nums[i - zero_count] = nums[i]     ret"
+    },
+    {
+      "id": "code_extra_041",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def find_missing(nums):     n = len(nums)     expected_sum = n * (n + 1) // 2     actual_sum = sum(nums)     return expected_sum - actual_sum ``` Time complexity: O(n), where n is the length"
+    },
+    {
+      "id": "code_extra_042",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def is_subsequence(s: str, t: str) -> bool:     i = j = 0     while i < len(s) and j < len(t):         if s[i] == t[j]:             i += 1         j += 1     return i == len(s) ``` Time comp"
+    },
+    {
+      "id": "code_extra_043",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 RESULT 2/4",
+      "response_preview": "```python def plus_one(digits):     carry = 1     for i in range(len(digits) - 1, -1, -1):         if digits[i] + carry == 10:             digits[i] = 0             carry = 1         else:            "
+    },
+    {
+      "id": "code_extra_044",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def length_of_longest_substring(s: str) -> int:     char_index = {}     left = 0     max_length = 0      for right in range(len(s)):         if s[right] in char_index:             left = max"
+    },
+    {
+      "id": "code_extra_045",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def remove_element(nums, val):     i = 0     for j in range(len(nums)):         if nums[j] != val:             nums[i] = nums[j]             i += 1     return i ``` Time: O(n) - we iterate t"
+    },
+    {
+      "id": "code_extra_046",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def majority_element(nums):     count = 0     candidate = None      for num in nums:         if count == 0:             candidate = num         count += 1 if num == candidate else -1      re"
+    },
+    {
+      "id": "code_extra_047",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def merge_intervals(intervals):     if not intervals:         return []      merged = []     current = intervals[0]      for interval in intervals[1:]:         if current[1] >= interval[0]: "
+    },
+    {
+      "id": "code_extra_048",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.0,
+      "reason": "no RESULT in output: '\\nTraceback (most recent call last):\\n  File \"/tmp/tmpylo38j4a.py\", line 3, in <module>\\n    def two_sum_closest(nums: List[int], target: int) -> int:\\nNameError: name \\'List\\' is not defined. Did you mean: \\'list\\'?\\n'",
+      "response_preview": "```python def two_sum_closest(nums: List[int], target: int) -> int:     nums.sort()     closest = float('inf')     for i in range(len(nums)):         left, right = i + 1, len(nums) - 1         while l"
+    },
+    {
+      "id": "code_extra_049",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.5,
+      "reason": "2/4 RESULT 2/4",
+      "response_preview": "```python def is_rotation(s: str, goal: str) -> bool:     if len(goal) > len(s):         return False      goal = goal + goal     return goal in s ``` Time complexity: O(n) where n is the length of th"
+    },
+    {
+      "id": "code_extra_050",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def str_str(haystack: str, needle: str) -> int:     return haystack.find(needle) ``` This solution uses Python's built-in `find` method to locate the first occurrence of the `needle` within "
+    },
+    {
+      "id": "code_extra_051",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.0,
+      "reason": "0/4 RESULT 0/4",
+      "response_preview": "```python def roman_to_int(s: str) -> int:     roman_numerals = {         'I': 1,         'V': 5,         'X': 10,         'L': 50,         'C': 100,         'D': 500,         'M': 1000     }     tota"
+    },
+    {
+      "id": "code_extra_052",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def subarray_sum(nums, target):     count = 0     current_sum = 0     seen = {0: 1}      for num in nums:         current_sum += num         if current_sum - target in seen:             coun"
+    },
+    {
+      "id": "code_extra_053",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.25,
+      "reason": "1/4 RESULT 1/4",
+      "response_preview": "```python def is_palindrome_range(s):     n = len(s)     for i in range(n):         for j in range(i + 1, n):             if s[i:j] == s[j:i][::-1]:                 return True     return False ```  T"
+    },
+    {
+      "id": "code_extra_054",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def array_product(nums):     n = len(nums)     left = [1] * n     right = [1] * n      # Calculate left products     for i in range(1, n):         left[i] = left[i - 1] * nums[i - 1]      # "
+    },
+    {
+      "id": "code_extra_055",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def num_of_ones(n):     count = 0     while n:         count += n & 1         n >>= 1     return count ``` Time: O(log n) - each bit is processed once."
+    },
+    {
+      "id": "code_extra_056",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python from collections import Counter  def is_palindrome_permutation(s: str) -> bool:     # Count occurrences of each character     char_count = Counter(s)          # Check if there's at most one "
+    },
+    {
+      "id": "code_extra_057",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 0.0,
+      "reason": "0/4 RESULT 0/4",
+      "response_preview": "```python def next_even(n):     return n + 2 if n % 2 != 0 else n ```  This solution works as follows: - If `n` is odd, it adds 2 to make it even. - If `n` is already even, it remains unchanged."
+    },
+    {
+      "id": "code_extra_058",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def is_valid_palindrome_pair(s: str) -> bool:     def clean(s):         return ''.join(c.lower() for c in s if c.isalnum())      cleaned = clean(s)     return cleaned == cleaned[::-1] ``` Ti"
+    },
+    {
+      "id": "code_extra_059",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "5/5 RESULT 5/5",
+      "response_preview": "```python def sum_two_smallest(nums):     nums.sort()     return nums[0] + nums[1] ``` Time: O(n log n) due to sorting. Space: O(1)."
+    },
+    {
+      "id": "code_extra_060",
+      "suite": "coding",
+      "subcategory": "python",
+      "checker": "unit_test",
+      "score": 1.0,
+      "reason": "4/4 RESULT 4/4",
+      "response_preview": "```python def add_digits(n):     while n >= 10:         n = sum(int(digit) for digit in str(n))     return n ``` The `add_digits` function repeatedly calculates the sum of the digits of the input numb"
+    }
+  ]
+}
